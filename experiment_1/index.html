@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 1 — Test Scene Overfitting</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; }
+    .hero .title { color: #1a1a2e; }
+    .hero .subtitle { color: #555; }
+    .hero .back-link { color: #888; font-size: 0.9rem; text-decoration: none; }
+    .hero .back-link:hover { color: #1a1a2e; }
+    .venue-tag {
+      display: inline-block;
+      background: #f0f0f0;
+      color: #555;
+      border-radius: 4px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .section-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+    .experiment-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s;
+      background: #fff;
+    }
+    .experiment-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .experiment-number {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .experiment-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .experiment-desc { color: #555; font-size: 0.95rem; margin-bottom: 1rem; }
+    .tag-status-progress { background: #fff3cd; color: #856404; }
+    .tag-status-planned  { background: #e9ecef; color: #495057; }
+    .conclusion-box {
+      background: #f8f8f8;
+      border-left: 4px solid #1a1a2e;
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 2rem;
+      color: #444;
+      font-size: 0.97rem;
+    }
+    footer { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <p style="margin-bottom:1rem;">
+        <a href="../" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right:6px;"></i>All Experiments
+        </a>
+      </p>
+      <h1 class="title is-1 publication-title">Experiment 1</h1>
+      <p class="subtitle">Test Scene Overfitting in Robot Foundation Models</p>
+      <span class="venue-tag">
+        Embodied AI &nbsp;·&nbsp; Robotics Security Division &nbsp;·&nbsp; 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GOAL & HYPOTHESIS ─────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="columns">
+
+          <div class="column">
+            <div class="section-label">Goal</div>
+            <p style="color:#444;">
+              Determine whether robot foundation models genuinely generalize across scenes,
+              or whether their benchmark performance is inflated by familiarity with
+              evaluation environments.
+            </p>
+          </div>
+
+          <div class="column">
+            <div class="section-label">Hypothesis</div>
+            <p style="color:#444;">
+              Fine-tuned models overfit to the specific scenes, objects, and backgrounds
+              present during training and evaluation. Reported benchmark numbers reflect
+              benchmark-specific memorization rather than generalizable manipulation capability.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SUB-EXPERIMENTS ───────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa; padding-top:2rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered" style="margin-bottom:2rem;">Sub-Experiments</h2>
+
+    <a href="1.1/" style="display:block; color:inherit; text-decoration:none;">
+      <div class="experiment-card">
+        <div class="experiment-number">1.1</div>
+        <div class="experiment-title">GR00T N1.6 : Zero-Shot vs Fine-Tuned on SimplerEnv</div>
+        <div class="experiment-desc">
+          Evaluate <code>nvidia/GR00T-N1.6-3B</code> (zero-shot) against
+          <code>nvidia/GR00T-N1.6-fractal</code> (fine-tuned on Fractal) on four
+          tabletop manipulation tasks. Probes language prompt robustness and scene overfitting.
+        </div>
+        <span class="tag tag-status-progress">In progress</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── CONCLUSION ────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="section-label" style="margin-bottom:0.75rem;">Overall Conclusion</div>
+        <div class="conclusion-box">
+          Pending completion of sub-experiments.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
