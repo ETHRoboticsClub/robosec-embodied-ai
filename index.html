@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoboSec — Robotics Security Research</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #1a1a2e; }
+    .hero .title, .hero .subtitle { color: #fff; }
+    .hero .subtitle { opacity: 0.75; }
+    .venue-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-radius: 4px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .experiment-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+    .experiment-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .experiment-number {
+      font-family: 'Castoro', serif;
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .experiment-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .experiment-desc {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .tag-status-progress { background: #fff3cd; color: #856404; }
+    .tag-status-planned  { background: #e9ecef; color: #495057; }
+    .tag-status-done     { background: #d1e7dd; color: #0f5132; }
+    .sub-links { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .sub-link {
+      font-size: 0.85rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      color: #333;
+      text-decoration: none;
+    }
+    .sub-link:hover { background: #f0f0f0; color: #000; }
+    footer { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">RoboSec</h1>
+      <p class="subtitle">Security research on robot foundation models</p>
+      <span class="venue-tag">
+        Robotics Security Division &nbsp;·&nbsp; ETH Robotics Club &nbsp;·&nbsp; 2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <p class="is-size-5" style="color:#444;">
+          A central hub for ablations, benchmarks, and security evaluations across
+          robot foundation models — GR00T, Pi0.5, OpenVLA, and others.
+          Each experiment probes a distinct security or generalization question.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIMENTS ───────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa; padding-top:2rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered" style="margin-bottom:2rem;">Experiments</h2>
+
+    <!-- Experiment 1 -->
+    <div class="experiment-card">
+      <div class="experiment-number">Experiment 1</div>
+      <div class="experiment-title">Test Scene Overfitting in Robot Foundation Models</div>
+      <div class="experiment-desc">
+        Do models overfit to the specific scenes, backgrounds, and objects present in their
+        evaluation benchmarks? We compare zero-shot and fine-tuned performance on in-distribution
+        vs out-of-distribution scenes across multiple models.
+      </div>
+      <span class="tag tag-status-progress">In progress</span>
+      <div class="sub-links">
+        <a class="sub-link" href="experiment_1/1.1/">
+          <i class="fas fa-robot" style="margin-right:4px;"></i>1.1 &mdash; GR00T N1.6
+        </a>
+        <span class="sub-link" style="opacity:0.5; cursor:default;">
+          1.2 &mdash; Pi0.5 (planned)
+        </span>
+        <span class="sub-link" style="opacity:0.5; cursor:default;">
+          1.3 &mdash; OpenVLA (planned)
+        </span>
+      </div>
+    </div>
+
+    <!-- Placeholder for future experiments -->
+    <div class="experiment-card" style="opacity:0.45; border-style:dashed;">
+      <div class="experiment-number">Experiment 2</div>
+      <div class="experiment-title" style="color:#aaa;">Coming soon</div>
+      <div class="experiment-desc" style="color:#aaa;">TBD</div>
+      <span class="tag tag-status-planned">Planned</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
