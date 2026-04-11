@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SUB_EXPERIMENT_TITLE</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            SUB_EXPERIMENT_TITLE
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="AUTHOR_GITHUB_URL">AUTHOR_NAME</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <!-- Add links to models, datasets, code, paper, etc. -->
+              <span class="link-block">
+                <a href="MODEL_URL"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Model</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEASER ────────────────────────────────────────────────────────────── -->
+<!-- Optional: show a representative side-by-side video or image here -->
+<!--
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="subtitle has-text-centered tag-zero-shot">CONDITION_A</p>
+          <video autoplay muted loop playsinline>
+            <source src="static/videos/condition_a/representative.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <p class="subtitle has-text-centered tag-finetuned">CONDITION_B</p>
+          <video autoplay muted loop playsinline>
+            <source src="static/videos/condition_b/representative.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+        TEASER_CAPTION
+      </h2>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ─── ABSTRACT ─────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            ABSTRACT: Describe the experiment, models, benchmark, and key question being probed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRAINING DATA ─────────────────────────────────────────────────────── -->
+<!-- Optional: describe the dataset used to train/fine-tune the model -->
+<!--
+<section class="section" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Training Data: DATASET_NAME</h2>
+    ...
+  </div>
+</section>
+-->
+
+<!-- ─── SETUP ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Experimental Setup</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead><tr><th>Component</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Simulation</td><td>SIMULATION_ENV</td></tr>
+            <tr><td>Robot</td><td>ROBOT_EMBODIMENT</td></tr>
+            <tr><td>Model A</td><td><code>org/model-a</code> &mdash; DESCRIPTION</td></tr>
+            <tr><td>Model B</td><td><code>org/model-b</code> &mdash; DESCRIPTION</td></tr>
+            <tr><td>Episodes per task</td><td>N per model</td></tr>
+            <tr><td>Hardware</td><td>HARDWARE_DESCRIPTION</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULTS TABLE ─────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <p class="has-text-centered" style="margin-bottom:1.5rem;">
+      Success rate over N episodes per condition.
+    </p>
+
+    <table class="table is-fullwidth is-bordered results-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th class="has-text-centered tag-zero-shot">CONDITION_A<br><small>model-a</small></th>
+          <th class="has-text-centered tag-finetuned">CONDITION_B<br><small>model-b</small></th>
+          <th class="has-text-centered">Reference<sup>†</sup><br><small>N eps</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TASK_1</strong></td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+        </tr>
+        <tr>
+          <td><strong>TASK_2</strong></td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+          <td class="has-text-centered result-pending">&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="has-text-grey is-size-7 has-text-centered">
+      &ldquo;&mdash;&rdquo; = run pending.
+    </p>
+  </div>
+</section>
+
+<!-- ─── ANALYSIS ──────────────────────────────────────────────────────────── -->
+<!-- Optional: add analysis sections for specific probes (e.g., prompt ablations) -->
+<!--
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Analysis: ANALYSIS_TITLE</h2>
+    ...
+  </div>
+</section>
+-->
+
+<!-- ─── VIDEO RESULTS ─────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Rollout Videos</h2>
+
+    <!-- ── TASK_1 ── -->
+    <div class="task-block">
+      <h3 class="title is-4">TASK_1</h3>
+      <p class="task-meta">
+        CONDITION_A: <strong class="result-pending">&mdash;</strong> &nbsp;&nbsp;
+        CONDITION_B: <strong class="result-pending">&mdash;</strong>
+      </p>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p class="vid-label tag-zero-shot">CONDITION_A</p>
+          <div class="video-placeholder">Video pending</div>
+        </div>
+        <div class="column">
+          <p class="vid-label tag-finetuned">CONDITION_B</p>
+          <div class="video-placeholder">Video pending</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

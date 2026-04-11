@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment N — EXPERIMENT_TITLE</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; }
+    .hero .title { color: #1a1a2e; }
+    .hero .subtitle { color: #555; }
+    .hero .back-link { color: #888; font-size: 0.9rem; text-decoration: none; }
+    .hero .back-link:hover { color: #1a1a2e; }
+    .section-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+    .experiment-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s;
+      background: #fff;
+    }
+    .experiment-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .experiment-number {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .experiment-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .experiment-desc { color: #555; font-size: 0.95rem; margin-bottom: 1rem; }
+    .tag-status-progress { background: #fff3cd; color: #856404; }
+    .tag-status-planned  { background: #e9ecef; color: #495057; }
+    .tag-status-done     { background: #d1e7dd; color: #0f5132; }
+    .conclusion-box {
+      background: #f8f8f8;
+      border-left: 4px solid #1a1a2e;
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 2rem;
+      color: #444;
+      font-size: 0.97rem;
+    }
+    footer.footer { background-color: #fff !important; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <p style="margin-bottom:1rem;">
+        <a href="../" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right:6px;"></i>All Experiments
+        </a>
+      </p>
+      <h1 class="title is-1 publication-title">Experiment N</h1>
+      <p class="subtitle">EXPERIMENT_TITLE</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GOAL & HYPOTHESIS ─────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="columns">
+
+          <div class="column">
+            <div class="section-label">Goal</div>
+            <p style="color:#444;">
+              GOAL: What question does this experiment answer?
+            </p>
+          </div>
+
+          <div class="column">
+            <div class="section-label">Hypothesis</div>
+            <p style="color:#444;">
+              HYPOTHESIS: What do you expect to find, and why?
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SUB-EXPERIMENTS ───────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa; padding-top:2rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered" style="margin-bottom:2rem;">Sub-Experiments</h2>
+
+    <!-- Sub-experiment N.1 -->
+    <a href="N.1/" style="display:block; color:inherit; text-decoration:none;">
+      <div class="experiment-card">
+        <div class="experiment-number">N.1</div>
+        <div class="experiment-title">SUB_EXPERIMENT_TITLE</div>
+        <div class="experiment-desc">
+          SUB_EXPERIMENT_DESCRIPTION
+        </div>
+        <span class="tag tag-status-planned">Planned</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── CONCLUSION ────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="section-label" style="margin-bottom:0.75rem;">Overall Conclusion</div>
+        <div class="conclusion-box">
+          Pending completion of sub-experiments.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
