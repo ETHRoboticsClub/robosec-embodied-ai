@@ -1,6 +1,6 @@
-# Robotics Security Experiments
+# Embodied AI
 
-Central hub for ablations, benchmarks, and security research across robot foundation models.
+Central hub for Embodied AI experiments within the Robotics Security Division: foundation model evaluation, adversarial robustness, and generalization research across robot policies and simulation environments.
 
 ## Experiments
 
