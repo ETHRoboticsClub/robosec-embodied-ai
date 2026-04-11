@@ -1,4 +1,4 @@
-# robosec — Robotics Security Experiments
+# Robotics Security Experiments
 
 Central hub for ablations, benchmarks, and security research across robot foundation models.
 
