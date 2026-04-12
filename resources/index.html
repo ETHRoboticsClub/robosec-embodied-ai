@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resources — Embodied AI Security</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; }
+    .hero .title { color: #1a1a2e; }
+    .hero .subtitle { color: #555; }
+    .back-link { color: #888; font-size: 0.9rem; text-decoration: none; }
+    .back-link:hover { color: #1a1a2e; }
+    .venue-tag {
+      display: inline-block;
+      background: #f0f0f0;
+      color: #555;
+      border-radius: 4px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .section-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+    .resource-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s;
+      background: #fff;
+    }
+    .resource-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .resource-icon {
+      font-size: 1.5rem;
+      color: #1a1a2e;
+      margin-bottom: 0.75rem;
+    }
+    .resource-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+    .resource-desc { color: #555; font-size: 0.95rem; margin-bottom: 1rem; }
+    .resource-meta {
+      font-size: 0.82rem;
+      color: #999;
+    }
+    footer { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <p style="margin-bottom:1rem;">
+        <a href="../" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right:6px;"></i>Home
+        </a>
+      </p>
+      <h1 class="title is-1 publication-title">Resources</h1>
+      <p class="subtitle">Shared reference material across all experiments</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARDS ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa; padding-top:2rem;">
+  <div class="container is-max-desktop">
+
+    <a href="benchmarks/" style="display:block; color:inherit; text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon"><i class="fas fa-flask"></i></div>
+        <div class="resource-title">Benchmarks</div>
+        <div class="resource-desc">
+          Simulation benchmarks for embodied AI evaluation — tasks, physics engines,
+          and supported robot embodiments. Covers 24 benchmarks from manipulation
+          to navigation and whole-body control.
+        </div>
+        <span class="resource-meta">24 benchmarks &nbsp;·&nbsp; MuJoCo · PhysX · PyBullet · Unity · Real</span>
+      </div>
+    </a>
+
+    <a href="datasets/" style="display:block; color:inherit; text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon"><i class="fas fa-database"></i></div>
+        <div class="resource-title">Datasets</div>
+        <div class="resource-desc">
+          Robot learning datasets used for training and evaluation — embodiments,
+          scale, and training context. Includes OXE, Fractal, BridgeData V2, DROID, and more.
+        </div>
+        <span class="resource-meta">8 datasets &nbsp;·&nbsp; Cross-embodiment · Real-world · Simulation</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/noemacee/robosec-embodied-ai">
+            <i class="fab fa-github"></i> robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benchmarks — Embodied AI Security</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .page-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; }
+    .hero .title { color: #1a1a2e; }
+    .hero .subtitle { color: #555; }
+    .back-link { color: #888; font-size: 0.9rem; text-decoration: none; }
+    .back-link:hover { color: #1a1a2e; }
+
+    .benchmark-table th {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      background: #fafafa;
+      border-bottom: 2px solid #e0e0e0;
+      white-space: nowrap;
+    }
+    .benchmark-table td { vertical-align: middle; font-size: 0.88rem; color: #333; }
+    .benchmark-table tr:hover td { background: #f9f9f9; }
+
+    .tag-manip { background: #e3f0ff; color: #1a5fb4; }
+    .tag-nav   { background: #e6f9ef; color: #1a7a43; }
+    .tag-wbc   { background: #fef3e2; color: #a05a00; }
+
+    .physics-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .obs-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      background: #f5f0ff;
+      color: #5a3ea0;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+      white-space: nowrap;
+    }
+
+    .embodiment-chip {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 12px;
+      background: #f5f5f5;
+      color: #444;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+      white-space: nowrap;
+    }
+
+    .built-upon {
+      font-size: 0.78rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    .desc-cell { color: #555; font-size: 0.83rem; }
+
+    .link-icon { color: #888; font-size: 0.85rem; margin-left: 0.3rem; }
+    .link-icon:hover { color: #1a1a2e; }
+
+    .section-note { font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; }
+
+    footer { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <p style="margin-bottom:1rem;">
+        <a href="../../" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right:6px;"></i>Home
+        </a>
+      </p>
+      <h1 class="title is-1 page-title">Benchmarks</h1>
+      <p class="subtitle">Simulation benchmarks for embodied AI evaluation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TABLE ─────────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="section-note" style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:flex-start;">
+      <div>
+        <strong>Tasks</strong><br>
+        <span class="tag tag-manip">Manip</span> Manipulation &nbsp;
+        <span class="tag tag-nav">Nav</span> Navigation &nbsp;
+        <span class="tag tag-wbc">WBC</span> Whole-Body Control
+      </div>
+      <div>
+        <strong>Observation modalities</strong><br>
+        <span class="obs-tag">RGB</span> Color camera &nbsp;
+        <span class="obs-tag">RGB-D</span> RGB + Depth &nbsp;
+        <span class="obs-tag">S</span> Semantic segmentation &nbsp;
+        <span class="obs-tag">PC</span> Point cloud &nbsp;
+        <span class="obs-tag">Pose</span> Joint/end-effector pose
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table is-fullwidth is-bordered benchmark-table">
+        <thead>
+          <tr>
+            <th>Benchmark</th>
+            <th>Task</th>
+            <th>Scenes / Objects</th>
+            <th>Observation</th>
+            <th>Physics</th>
+            <th>Built Upon</th>
+            <th>Embodiments</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><strong>robosuite</strong>
+              <a href="https://github.com/ARISE-Initiative/robosuite" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / 10</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">MuJoCo</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <div style="margin-bottom:0.3rem;">
+                <span style="font-size:0.7rem;color:#aaa;text-transform:uppercase;letter-spacing:0.05em;">Fixed Base</span><br>
+                <span class="embodiment-chip">Panda</span>
+                <span class="embodiment-chip">PandaDexRH</span>
+                <span class="embodiment-chip">PandaDexLH</span>
+                <span class="embodiment-chip">Sawyer</span>
+                <span class="embodiment-chip">IIWA</span>
+                <span class="embodiment-chip">Jaco</span>
+                <span class="embodiment-chip">UR5e</span>
+                <span class="embodiment-chip">Baxter</span>
+                <span class="embodiment-chip">Kinova3</span>
+                <span class="embodiment-chip">XArm7</span>
+              </div>
+              <div style="margin-bottom:0.3rem;">
+                <span style="font-size:0.7rem;color:#aaa;text-transform:uppercase;letter-spacing:0.05em;">Wheeled</span><br>
+                <span class="embodiment-chip">PandaOmron</span>
+                <span class="embodiment-chip">Tiago</span>
+              </div>
+              <div>
+                <span style="font-size:0.7rem;color:#aaa;text-transform:uppercase;letter-spacing:0.05em;">Legged</span><br>
+                <span class="embodiment-chip">SpotWithArm</span>
+                <span class="embodiment-chip">SpotWithArmFloating</span>
+                <span class="embodiment-chip">GR1</span>
+                <span class="embodiment-chip">GR1FixedLowerBody</span>
+                <span class="embodiment-chip">GR1ArmsOnly</span>
+                <span class="embodiment-chip">GR1FloatingBody</span>
+              </div>
+            </td>
+            <td class="desc-cell">Modular framework, 11 tasks</td>
+          </tr>
+
+          <tr>
+            <td><strong>RoboCasa</strong>
+              <a href="https://github.com/robocasa/robocasa" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>120 / 2.5K</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">MuJoCo</span></td>
+            <td class="built-upon">robosuite</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda (mobile)</span>
+            </td>
+            <td class="desc-cell">100 kitchen tasks, photorealistic</td>
+          </tr>
+
+          <tr>
+            <td><strong>LIBERO</strong>
+              <a href="https://github.com/Lifelong-Robot-Learning/LIBERO" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / —</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">MuJoCo</span></td>
+            <td class="built-upon">robosuite</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+            </td>
+            <td class="desc-cell">130 tasks in 4 task suites</td>
+          </tr>
+
+          <tr>
+            <td><strong>Meta-World</strong>
+              <a href="https://github.com/Farama-Foundation/Metaworld" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>1 / 80</td>
+            <td><span class="obs-tag">Pose</span></td>
+            <td><span class="physics-tag">MuJoCo</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">Sawyer</span>
+            </td>
+            <td class="desc-cell">50 Manip tasks for Meta-RL</td>
+          </tr>
+
+          <tr>
+            <td><strong>LeVERB-Bench</strong>
+              <a href="https://arxiv.org/abs/2502.01928" target="_blank" class="link-icon"><i class="fas fa-file-alt"></i></a>
+            </td>
+            <td>
+              <span class="tag tag-nav">Nav</span>
+              <span class="tag tag-wbc">WBC</span>
+            </td>
+            <td>4 / —</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">PhysX (Isaac Sim)</span></td>
+            <td class="built-upon">Isaac Sim</td>
+            <td>
+              <span class="embodiment-chip">Unitree H1</span>
+            </td>
+            <td class="desc-cell">Humanoid control</td>
+          </tr>
+
+          <tr>
+            <td><strong>ManiSkill</strong>
+              <a href="https://github.com/haosulab/ManiSkill" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / 162</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">PC</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">SAPIEN</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+              <span class="embodiment-chip">XArm</span>
+            </td>
+            <td class="desc-cell">4 tasks, 36K demos</td>
+          </tr>
+
+          <tr>
+            <td><strong>ManiSkill 2</strong>
+              <a href="https://github.com/haosulab/ManiSkill2" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / 2.1K</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">PC</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">ManiSkill</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+              <span class="embodiment-chip">XArm</span>
+            </td>
+            <td class="desc-cell">Extended task diversity</td>
+          </tr>
+
+          <tr>
+            <td><strong>ManiSkill 3</strong>
+              <a href="https://github.com/haosulab/ManiSkill" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td>
+              <span class="tag tag-nav">Nav</span>
+              <span class="tag tag-manip">Manip</span>
+              <span class="tag tag-wbc">WBC</span>
+            </td>
+            <td>— / —</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">PC</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">ManiSkill 2</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+              <span class="embodiment-chip">Unitree H1</span>
+              <span class="embodiment-chip">Fetch</span>
+            </td>
+            <td class="desc-cell">GPU-parallelized simulation</td>
+          </tr>
+
+          <tr>
+            <td><strong>ManiSkill-HAB</strong>
+              <a href="https://github.com/haosulab/ManiSkill" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>105 / 92</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">ManiSkill 3, Habitat 2.0</td>
+            <td>
+              <span class="embodiment-chip">Fetch</span>
+            </td>
+            <td class="desc-cell">HAB tasks from Habitat 2.0</td>
+          </tr>
+
+          <tr>
+            <td><strong>RoboTwin</strong>
+              <a href="https://github.com/TeleXRobots/RoboTwin" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / 731</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">SAPIEN</td>
+            <td>
+              <span class="embodiment-chip">AgileX AgiBot G1 (dual-arm)</span>
+            </td>
+            <td class="desc-cell">Dual-arm tasks</td>
+          </tr>
+
+          <tr>
+            <td><strong>Ravens</strong>
+              <a href="https://github.com/google-research/ravens" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / —</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">UR5</span>
+            </td>
+            <td class="desc-cell">10 tabletop tasks</td>
+          </tr>
+
+          <tr>
+            <td><strong>VIMA-BENCH</strong>
+              <a href="https://github.com/vimalabs/VIMA" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / 29</td>
+            <td><span class="obs-tag">RGB</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">Ravens</td>
+            <td>
+              <span class="embodiment-chip">UR5</span>
+            </td>
+            <td class="desc-cell">17 multimodal prompt tasks</td>
+          </tr>
+
+          <tr>
+            <td><strong>LoHoRavens</strong>
+              <a href="https://github.com/LoHoRavens/LoHoRavens" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>1 / 3</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">Ravens</td>
+            <td>
+              <span class="embodiment-chip">UR5</span>
+            </td>
+            <td class="desc-cell">Long-horizon planning</td>
+          </tr>
+
+          <tr>
+            <td><strong>CALVIN</strong>
+              <a href="https://github.com/mees/calvin" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>4 / 7</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+            </td>
+            <td class="desc-cell">Long-horizon lang-cond tasks</td>
+          </tr>
+
+          <tr>
+            <td><strong>Habitat</strong>
+              <a href="https://github.com/facebookresearch/habitat-sim" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-nav">Nav</span></td>
+            <td>185 / —</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">Bullet</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">LoCoBot</span>
+            </td>
+            <td class="desc-cell">Fast, Nav only</td>
+          </tr>
+
+          <tr>
+            <td><strong>Habitat 2.0</strong>
+              <a href="https://github.com/facebookresearch/habitat-lab" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td>
+              <span class="tag tag-nav">Nav</span>
+              <span class="tag tag-manip">Manip</span>
+            </td>
+            <td>105 / 92</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">Bullet</span></td>
+            <td class="built-upon">Habitat</td>
+            <td>
+              <span class="embodiment-chip">Fetch</span>
+              <span class="embodiment-chip">Spot</span>
+            </td>
+            <td class="desc-cell">Mobile manipulation (HAB)</td>
+          </tr>
+
+          <tr>
+            <td><strong>Habitat 3.0</strong>
+              <a href="https://github.com/facebookresearch/habitat-lab" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td>
+              <span class="tag tag-nav">Nav</span>
+              <span class="tag tag-manip">Manip</span>
+            </td>
+            <td>211 / 18K</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">Bullet</span></td>
+            <td class="built-upon">Habitat 2.0</td>
+            <td>
+              <span class="embodiment-chip">Fetch</span>
+              <span class="embodiment-chip">Spot</span>
+            </td>
+            <td class="desc-cell">Human avatars support</td>
+          </tr>
+
+          <tr>
+            <td><strong>RLBench</strong>
+              <a href="https://github.com/stepjam/RLBench" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>1 / 28</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">V-REP</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+            </td>
+            <td class="desc-cell">Tiered task difficulty</td>
+          </tr>
+
+          <tr>
+            <td><strong>THE COLOSSEUM</strong>
+              <a href="https://github.com/robot-colosseum/robot-colosseum" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>1 / 107</td>
+            <td><span class="obs-tag">RGB-D</span></td>
+            <td><span class="physics-tag">PyBullet</span></td>
+            <td class="built-upon">RLBench</td>
+            <td>
+              <span class="embodiment-chip">Franka Panda</span>
+            </td>
+            <td class="desc-cell">20 tasks, 14 env variations</td>
+          </tr>
+
+          <tr>
+            <td><strong>AI2-THOR</strong>
+              <a href="https://github.com/allenai/ai2thor" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td>
+              <span class="tag tag-nav">Nav</span>
+              <span class="tag tag-manip">Manip</span>
+            </td>
+            <td>— / 118</td>
+            <td><span class="obs-tag">RGB-D</span><span class="obs-tag">S</span></td>
+            <td><span class="physics-tag">Unity</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">LoCoBot</span>
+            </td>
+            <td class="desc-cell">Object states, task planning</td>
+          </tr>
+
+          <tr>
+            <td><strong>CHORES</strong>
+              <a href="https://github.com/allenai/ai2thor" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-nav">Nav</span></td>
+            <td>191K / 40K</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">Unity</span></td>
+            <td class="built-upon">AI2-THOR</td>
+            <td>
+              <span class="embodiment-chip">LoCoBot</span>
+            </td>
+            <td class="desc-cell">Shortest-path planning</td>
+          </tr>
+
+          <tr>
+            <td><strong>SIMPLER</strong>
+              <a href="https://github.com/simpler-env/SimplerEnv" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>4 / 17</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">PhysX</span></td>
+            <td class="built-upon">SAPIEN, Isaac Sim</td>
+            <td>
+              <span class="embodiment-chip">Google Everyday Robot</span>
+              <span class="embodiment-chip">WidowX 250</span>
+            </td>
+            <td class="desc-cell">Real-to-sim evaluation</td>
+          </tr>
+
+          <tr>
+            <td><strong>RoboArena</strong>
+              <a href="https://github.com/roboarena/roboarena" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+            </td>
+            <td><span class="tag tag-manip">Manip</span></td>
+            <td>— / —</td>
+            <td><span class="obs-tag">RGB</span></td>
+            <td><span class="physics-tag">Real</span></td>
+            <td class="built-upon">—</td>
+            <td>
+              <span class="embodiment-chip">Real-world (unspecified)</span>
+            </td>
+            <td class="desc-cell">Distributed real-world evaluation</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/noemacee/robosec-embodied-ai">
+            <i class="fab fa-github"></i> robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

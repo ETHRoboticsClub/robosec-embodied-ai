@@ -66,6 +66,22 @@
     }
     .sub-link:hover { background: #f0f0f0; color: #000; }
     footer.footer { background-color: #fff !important; }
+    .resource-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.25rem 1.75rem;
+      transition: box-shadow 0.2s;
+      background: #fff;
+    }
+    .resource-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .resource-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.3rem;
+    }
+    .resource-desc { color: #666; font-size: 0.88rem; }
   </style>
 </head>
 <body>
@@ -91,6 +107,34 @@
           across robot policies and simulation environments.
         </p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESOURCES ─────────────────────────────────────────────────────────── -->
+<section class="section" style="padding-top:2rem; padding-bottom:1.5rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered" style="margin-bottom:1.5rem;">Resources</h2>
+    <div class="columns">
+
+      <div class="column">
+        <a href="resources/benchmarks/" style="display:block; color:inherit; text-decoration:none;">
+          <div class="resource-card">
+            <div class="resource-title"><i class="fas fa-flask" style="margin-right:0.5rem; color:#888;"></i>Benchmarks</div>
+            <div class="resource-desc">24 simulation benchmarks — tasks, physics engines, supported embodiments.</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="column">
+        <a href="resources/datasets/" style="display:block; color:inherit; text-decoration:none;">
+          <div class="resource-card">
+            <div class="resource-title"><i class="fas fa-database" style="margin-right:0.5rem; color:#888;"></i>Datasets</div>
+            <div class="resource-desc">Robot learning datasets — embodiments, scale, and training context.</div>
+          </div>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>

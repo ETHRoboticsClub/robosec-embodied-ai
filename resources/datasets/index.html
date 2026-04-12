@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datasets — Embodied AI Security</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .page-title { font-family: 'Google Sans', sans-serif; }
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; }
+    .hero .title { color: #1a1a2e; }
+    .hero .subtitle { color: #555; }
+    .back-link { color: #888; font-size: 0.9rem; text-decoration: none; }
+    .back-link:hover { color: #1a1a2e; }
+
+    .dataset-table th {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      background: #fafafa;
+      border-bottom: 2px solid #e0e0e0;
+      white-space: nowrap;
+    }
+    .dataset-table td { vertical-align: middle; font-size: 0.9rem; color: #333; }
+    .dataset-table tr:hover td { background: #f9f9f9; }
+
+    .embodiment-chip {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 12px;
+      background: #f5f5f5;
+      color: #444;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+      white-space: nowrap;
+    }
+
+    .episodes-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: #eef5ff;
+      color: #1a5fb4;
+      white-space: nowrap;
+    }
+
+    .collection-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .collection-teleop   { background: #e6f9ef; color: #1a7a43; }
+    .collection-scripted { background: #fef3e2; color: #a05a00; }
+    .collection-learned  { background: #f3e6ff; color: #6a1ab4; }
+    .collection-mixed    { background: #e8e8e8; color: #444; }
+
+    .modality-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #555;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+      white-space: nowrap;
+    }
+
+    .section-note { font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; }
+
+    footer { background: #fafafa; }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <p style="margin-bottom:1rem;">
+        <a href="../../" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right:6px;"></i>Home
+        </a>
+      </p>
+      <h1 class="title is-1 page-title">Datasets</h1>
+      <p class="subtitle">Real-world robot datasets used in VLA research</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TABLE ─────────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <p class="section-note">
+      <strong>Skill</strong> = atomic action primitives (pick, place, reach) &nbsp;·&nbsp;
+      <strong>Task</strong> = instruction-level goals &nbsp;·&nbsp;
+      <strong>Modality:</strong> RGB · D = depth · L = language · F = force/torque · A = audio · T = touch
+    </p>
+
+    <div class="table-container">
+      <table class="table is-fullwidth is-bordered dataset-table">
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Episodes</th>
+            <th>Skills</th>
+            <th>Tasks</th>
+            <th>Modality</th>
+            <th>Embodiment</th>
+            <th>Collection</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><strong>QT-Opt</strong></td>
+            <td><span class="episodes-tag">580K</span></td>
+            <td>1 (Pick)</td>
+            <td>—</td>
+            <td><span class="modality-tag">RGB</span></td>
+            <td><span class="embodiment-chip">KUKA LBR iiwa</span></td>
+            <td><span class="collection-tag collection-learned">Learned</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>MT-Opt</strong></td>
+            <td><span class="episodes-tag">800K</span></td>
+            <td>2</td>
+            <td>12</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">7 robots</span></td>
+            <td><span class="collection-tag collection-scripted">Scripted</span> <span class="collection-tag collection-learned">Learned</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>RoboNet</strong></td>
+            <td><span class="episodes-tag">162K</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="modality-tag">RGB</span></td>
+            <td><span class="embodiment-chip">7 robots</span></td>
+            <td><span class="collection-tag collection-scripted">Scripted</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>BridgeData</strong></td>
+            <td><span class="episodes-tag">7.2K</span></td>
+            <td>4</td>
+            <td>71</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">WidowX 250</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>BridgeData V2</strong></td>
+            <td><span class="episodes-tag">60.1K</span></td>
+            <td>13</td>
+            <td>—</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">WidowX 250</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>BC-Z</strong></td>
+            <td><span class="episodes-tag">26.0K</span></td>
+            <td>3</td>
+            <td>100</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">Google EDR</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>Language Table</strong></td>
+            <td><span class="episodes-tag">413K</span></td>
+            <td>1 (Push)</td>
+            <td>—</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">xArm</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>RH20T</strong></td>
+            <td><span class="episodes-tag">110K</span></td>
+            <td>42</td>
+            <td>147</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span><span class="modality-tag">F</span><span class="modality-tag">A</span></td>
+            <td><span class="embodiment-chip">4 robots</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>RT-1</strong></td>
+            <td><span class="episodes-tag">130K</span></td>
+            <td>12</td>
+            <td>700+</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">Google EDR</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>OXE</strong></td>
+            <td><span class="episodes-tag">1.4M</span></td>
+            <td>527</td>
+            <td>160,266</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">22 robots</span></td>
+            <td><span class="collection-tag collection-mixed">Mixed</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>DROID</strong></td>
+            <td><span class="episodes-tag">76K</span></td>
+            <td>86</td>
+            <td>—</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">Franka Panda</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>FuSe</strong></td>
+            <td><span class="episodes-tag">27K</span></td>
+            <td>2</td>
+            <td>3</td>
+            <td><span class="modality-tag">RGB</span><span class="modality-tag">L</span><span class="modality-tag">T</span><span class="modality-tag">A</span></td>
+            <td><span class="embodiment-chip">WidowX 250</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>RoboMIND</strong></td>
+            <td><span class="episodes-tag">107K</span></td>
+            <td>38</td>
+            <td>479</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">4 robots</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>AgiBot World</strong></td>
+            <td><span class="episodes-tag">1M</span></td>
+            <td>87</td>
+            <td>217</td>
+            <td><span class="modality-tag">RGB-D</span><span class="modality-tag">L</span></td>
+            <td><span class="embodiment-chip">AgiBot G1</span></td>
+            <td><span class="collection-tag collection-teleop">Teleop</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-note" style="margin-top:1rem;">
+      Adapted from the survey (Table 1). Statistics as reported in original papers.
+    </p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/noemacee/robosec-embodied-ai">
+            <i class="fab fa-github"></i> robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
