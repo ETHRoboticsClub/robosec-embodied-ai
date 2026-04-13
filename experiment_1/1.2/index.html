@@ -378,8 +378,8 @@
     <p class="has-text-centered" style="margin-bottom:1.5rem;">
       The LIBERO fine-tuned model is evaluated on
       <a href="https://robocasa.ai/">RoboCasa</a> tasks using a <strong>PandaOmron</strong>
-      fixed-base embodiment — a completely different environment and robot morphology
-      from the LIBERO training distribution.
+      fixed-base embodiment — the same Franka Panda arm, but in a completely different
+      simulation environment from the LIBERO training distribution.
     </p>
 
     <table class="table is-fullwidth is-bordered results-table" style="margin-bottom:2rem;">
@@ -404,8 +404,9 @@
     <div class="content" style="margin-bottom:2rem; padding:1rem 1.5rem; background:#fff0f0; border-left:4px solid #c0392b; border-radius:0 6px 6px 0;">
       <p><strong>Complete failure on out-of-distribution environments.</strong>
         Despite near-perfect scores on LIBERO, the fine-tuned model fails on every episode
-        in RoboCasa. The model has learned LIBERO-specific scene representations that do
-        not transfer to a new simulator, new task layouts, or a new robot embodiment.
+        in RoboCasa. The robot arm is identical — the only change is the simulation
+        environment. The model has learned LIBERO-specific scene representations that
+        do not transfer to a new simulator or new task layouts.
       </p>
     </div>
 
