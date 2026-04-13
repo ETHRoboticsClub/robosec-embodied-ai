@@ -371,6 +371,95 @@
   </div>
 </section>
 
+<!-- ─── ROBOCASA SECTION ──────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Cross-Environment: RoboCasa</h2>
+    <p class="has-text-centered" style="margin-bottom:1.5rem;">
+      The LIBERO fine-tuned model is evaluated on
+      <a href="https://robocasa.ai/">RoboCasa</a> tasks using a <strong>PandaOmron</strong>
+      fixed-base embodiment — a completely different environment and robot morphology
+      from the LIBERO training distribution.
+    </p>
+
+    <table class="table is-fullwidth is-bordered results-table" style="margin-bottom:2rem;">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th class="has-text-centered tag-finetuned">Fine-Tuned + Prompt<br><small>GR00T-N1.6-LIBERO</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>OpenSingleDoor</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;4)</small></td>
+        </tr>
+        <tr>
+          <td><strong>PnPCounterToCab</strong></td>
+          <td class="has-text-centered result-fail">0% &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;4)</small></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="content" style="margin-bottom:2rem; padding:1rem 1.5rem; background:#fff0f0; border-left:4px solid #c0392b; border-radius:0 6px 6px 0;">
+      <p><strong>Complete failure on out-of-distribution environments.</strong>
+        Despite near-perfect scores on LIBERO, the fine-tuned model fails on every episode
+        in RoboCasa. The model has learned LIBERO-specific scene representations that do
+        not transfer to a new simulator, new task layouts, or a new robot embodiment.
+      </p>
+    </div>
+
+    <!-- ── OpenSingleDoor ── -->
+    <div class="task-block">
+      <h3 class="title is-4">OpenSingleDoor &mdash; Fine-Tuned (RoboCasa)</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-fail">0%</strong> &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;4)</small></p>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 1</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/open_single_door/58b29428-5d31-4558-950b-ddc824a0a46f_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 2</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/open_single_door/7617011f-8c85-4be1-a9b7-df7a837ef51f_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 3</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/open_single_door/7aae7197-b34a-4646-81b7-b8f929b0c098_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 4</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/open_single_door/e3bc8d9d-7f2f-4edc-976c-3f24ba8ed680_s0.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PnPCounterToCab ── -->
+    <div class="task-block">
+      <h3 class="title is-4">PnPCounterToCab &mdash; Fine-Tuned (RoboCasa)</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-fail">0%</strong> &nbsp;<small class="has-text-grey">(0&thinsp;/&thinsp;4)</small></p>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 1</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/pnp_counter_to_cab/672fa67a-d1a5-409f-a98b-cd3446e4208a_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 2</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/pnp_counter_to_cab/6797c990-6643-474b-8644-fee51e4c41fb_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 3</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/pnp_counter_to_cab/8a6ce04d-b288-4e2b-a86d-2d4c011cc7a0_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Episode 4</p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/robocasa/pnp_counter_to_cab/b7460af0-8ce4-4dfd-8f65-65dd529aa48f_s0.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
 <footer class="footer">
   <div class="container">
