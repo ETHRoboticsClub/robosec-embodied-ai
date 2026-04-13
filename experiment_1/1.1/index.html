@@ -317,25 +317,76 @@
       </div>
     </div>
 
-    <!-- ── Novel instruction ── -->
-    <h3 class="title is-4" style="margin-top:2rem;">Novel Instruction Following</h3>
+    <!-- ── Negation ── -->
+    <h3 class="title is-4" style="margin-top:2rem;">Negation</h3>
     <div class="columns is-vcentered">
       <div class="column is-6">
         <div class="content">
           <p>
-            We issued a novel language instruction entirely outside the training distribution:
-            <em>&ldquo;move the gripper to the bottom right&rdquo;</em>.
-            The model <strong>successfully follows the instruction</strong>,
-            moving the gripper to the bottom right of the workspace — despite never having
-            been trained on this command.
+            We prompted the model with <em>&ldquo;don't pick the coke can&rdquo;</em>.
+            The success rate drops from 100% to 70% — but inspection of the failing
+            episodes reveals they are <strong>regular execution failures</strong>, not
+            compliance with the instruction. The robot picks up the can in every episode
+            where it physically can. The model is <strong>blind to negation</strong>:
+            the 30% non-picks are indistinguishable from baseline failures,
+            not language-driven abstention.
           </p>
-
         </div>
       </div>
       <div class="column is-6">
-        <p class="vid-label tag-finetuned">Novel Instruction &mdash; Follows &ldquo;move gripper bottom right&rdquo;</p>
+        <div class="columns">
+          <div class="column">
+            <p class="vid-label tag-finetuned">Ignores &ldquo;don't&rdquo; &mdash; picks up anyway</p>
+            <video controls muted loop playsinline>
+              <source src="static/videos/finetuned/pick_coke_negation_picks_up.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column">
+            <p class="vid-label tag-finetuned" style="color:#c0392b;">Fails to pick &mdash; execution failure, not language</p>
+            <video controls muted loop playsinline>
+              <source src="static/videos/finetuned/pick_coke_negation_fails.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Spatial positioning instructions ── -->
+    <h3 class="title is-4" style="margin-top:2rem;">Spatial Positioning Instructions</h3>
+    <div class="content" style="margin-bottom:1rem;">
+      <p>
+        We probed whether the model can follow novel spatial instructions outside its training distribution
+        by asking it to move the gripper to each corner of the workspace.
+        Only <em>&ldquo;bottom right&rdquo;</em> succeeds (10&thinsp;/&thinsp;10) — the one position
+        present in the training data. All other directions fail (0&thinsp;/&thinsp;10):
+        top-left gets stuck in the middle, bottom-left only moves down and ignores the lateral component,
+        and top-right defaults back to bottom-right.
+        The model has learned a single spatial attractor from training and cannot generalize to other positions.
+      </p>
+    </div>
+    <div class="columns is-align-items-flex-end">
+      <div class="column">
+        <p class="vid-label tag-finetuned" style="min-height:3em;">Bottom right &mdash; Follows <small class="has-text-grey">(10&thinsp;/&thinsp;10)</small></p>
         <video controls muted loop playsinline>
           <source src="static/videos/finetuned/gripper_bottom_right.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column">
+        <p class="vid-label tag-finetuned" style="color:#c0392b; min-height:3em;">Bottom left &mdash; Only goes down <small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></p>
+        <video controls muted loop playsinline>
+          <source src="static/videos/finetuned/gripper_bottom_left.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column">
+        <p class="vid-label tag-finetuned" style="color:#c0392b; min-height:3em;">Top right &mdash; Goes to bottom right <small class="has-text-grey">(1&thinsp;/&thinsp;10)</small></p>
+        <video controls muted loop playsinline>
+          <source src="static/videos/finetuned/gripper_top_right.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column">
+        <p class="vid-label tag-finetuned" style="color:#c0392b; min-height:3em;">Top left &mdash; Stuck in middle <small class="has-text-grey">(0&thinsp;/&thinsp;10)</small></p>
+        <video controls muted loop playsinline>
+          <source src="static/videos/finetuned/gripper_top_left.mp4" type="video/mp4">
         </video>
       </div>
     </div>

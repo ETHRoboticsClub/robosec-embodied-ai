@@ -84,7 +84,8 @@ Each model needs two terminals. Run from `~/Isaac-GR00T`.
 
 ```bash
 export MUJOCO_GL=egl
-export PYOPENGL_PLATFORM=egl
+  export PYOPENGL_PLATFORM=egl
+  export VK_ICD_FILENAMES=/etc/vulkan/icd.d/nvidia_icd.json
 ```
 
 **Terminal 1 — Policy server**

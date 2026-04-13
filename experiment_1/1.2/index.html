@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GR00T N1.6: Zero-Shot vs Fine-Tuned on Franka Panda Tasks</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            GR00T N1.6: Zero-Shot vs Fine-Tuned<br>on Franka Panda Tasks
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/noemacee">Noé Macé</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-3B"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Base Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/0xAnkitSingh/GR00T-N1.6-LIBERO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Fine-tuned Model</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABSTRACT ─────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate GR00T N1.6 on the <strong>Franka Panda</strong> embodiment across
+            multiple simulation environments, comparing the zero-shot base model
+            (<code>nvidia/GR00T-N1.6-3B</code>) against
+            <code>0xAnkitSingh/GR00T-N1.6-LIBERO</code>, fine-tuned on the
+            <a href="https://libero-project.github.io/">LIBERO</a> benchmark.
+            Current evaluations are run in LIBERO sim; additional simulators may be added.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SETUP ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Experimental Setup</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead><tr><th>Component</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Simulation</td><td>LIBERO (current); additional simulators planned</td></tr>
+            <tr><td>Robot</td><td>Franka Panda</td></tr>
+            <tr><td>Zero-shot model</td><td><code>nvidia/GR00T-N1.6-3B</code> &mdash; 3B params, no task-specific training</td></tr>
+            <tr><td>Fine-tuned model</td><td><code>0xAnkitSingh/GR00T-N1.6-LIBERO</code> &mdash; fine-tuned on LIBERO (Franka Panda)</td></tr>
+            <tr><td>Episodes per task</td><td>10 per model</td></tr>
+            <tr><td>Hardware</td><td>AWS g5.2xlarge &mdash; NVIDIA A10G 24 GB, 32 GB RAM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULTS TABLE ─────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <p class="has-text-centered" style="margin-bottom:1.5rem;">
+      The key question: does the fine-tuned model follow language instructions, or does it
+      overfit to the benchmark scene? The <strong>No Prompt</strong> column runs the same
+      fine-tuned model with no language input — if scores hold, the model ignores language entirely.
+      Reference scores from the <a href="https://huggingface.co/0xAnkitSingh/GR00T-N1.6-LIBERO">model card</a>,
+      200 episodes.
+    </p>
+    <table class="table is-fullwidth is-bordered results-table">
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th class="has-text-centered tag-finetuned">Fine-Tuned + Prompt<br><small>GR00T-N1.6-LIBERO</small></th>
+          <th class="has-text-centered" style="background:#f5f0ff; color:#6c3483;">No Prompt<br><small>GR00T-N1.6-LIBERO</small></th>
+          <th class="has-text-centered">Reference<sup>†</sup><br><small>200 eps</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LIBERO-Spatial</strong></td>
+          <td class="has-text-centered result-pass">100% &nbsp;<small class="has-text-grey">(100&thinsp;/&thinsp;100)</small></td>
+          <td class="has-text-centered result-mid" style="background:#f5f0ff;">63% &nbsp;<small class="has-text-grey">(32&thinsp;/&thinsp;51)</small></td>
+          <td class="has-text-centered">96.0% &nbsp;<small class="has-text-grey">(192&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>LIBERO-Object</strong></td>
+          <td class="has-text-centered result-pass">97% &nbsp;<small class="has-text-grey">(97&thinsp;/&thinsp;100)</small></td>
+          <td class="has-text-centered has-text-grey">&mdash;</td>
+          <td class="has-text-centered">100.0% &nbsp;<small class="has-text-grey">(200&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>LIBERO-Goal</strong></td>
+          <td class="has-text-centered result-pass">98% &nbsp;<small class="has-text-grey">(98&thinsp;/&thinsp;100)</small></td>
+          <td class="has-text-centered has-text-grey">&mdash;</td>
+          <td class="has-text-centered">98.0% &nbsp;<small class="has-text-grey">(196&thinsp;/&thinsp;200)</small></td>
+        </tr>
+        <tr>
+          <td><strong>LIBERO-10</strong></td>
+          <td class="has-text-centered has-text-grey">&mdash;</td>
+          <td class="has-text-centered has-text-grey">&mdash;</td>
+          <td class="has-text-centered">97.5% &nbsp;<small class="has-text-grey">(195&thinsp;/&thinsp;200)</small></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="has-text-grey is-size-7 has-text-centered">
+      &ldquo;&mdash;&rdquo; = run pending. &nbsp;
+      <sup>†</sup> Reference from
+      <a href="https://huggingface.co/0xAnkitSingh/GR00T-N1.6-LIBERO" class="has-text-grey">
+        0xAnkitSingh/GR00T-N1.6-LIBERO model card</a>.
+    </p>
+
+    <div class="content" style="margin-top:1.5rem; padding:1rem 1.5rem; background:#fff8e1; border-left:4px solid #f0a500; border-radius:0 6px 6px 0;">
+      <p><strong>Observation — failures are timing issues, not task failures.</strong>
+        Inspection of failing episodes reveals the model understands the task and
+        executes the correct sequence of motions in every case. Failures occur because
+        the episode times out before the motion completes — the robot is still on track
+        when the episode ends. This suggests the drop from reference scores is an
+        artifact of episode length limits rather than a genuine capability gap.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VIDEO RESULTS ─────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Rollout Videos</h2>
+
+    <!-- ── LIBERO-Spatial ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Spatial &mdash; Fine-Tuned</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-pass">100%</strong> &nbsp;<small class="has-text-grey">(100&thinsp;/&thinsp;100)</small></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Table center <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_table_center/2040dbdc-6c6a-41b1-88fd-21e0238f9d01_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Next to plate <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_next_to_plate/1675a4cd-44f4-440b-994e-b8bf3a9ebb8d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Next to ramekin <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_next_to_ramekin/2580ecf9-d44f-43a6-9468-c423c9bea8eb_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Next to cookie box <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_next_to_cookie_box/13247217-d444-44d9-b277-ac6f5a3c2412_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Between plate &amp; ramekin <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_between_plate_ramekin/01a9fb18-e493-4b9c-8ec2-e3bb124df9e4_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">On ramekin <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_on_ramekin/1a679cb1-d706-4e62-bde9-0d1bb0958532_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">On cookie box <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_on_cookie_box/06ecb12b-92b2-48d1-8e33-aedfc182d0fa_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">On stove <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_on_stove/2c018aad-d351-4fff-97f5-9aa2565e689d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">On wooden cabinet <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_on_wooden_cabinet/03a75246-9fc1-45e2-8f06-7aa53c2d56da_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">In top drawer <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_spatial/bowl_top_drawer/1544a28f-e29e-44a0-85fa-cffdfbbd9839_s1.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIBERO-Spatial No Prompt ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Spatial &mdash; No Prompt</h3>
+      <p class="task-meta">No prompt: <strong class="result-mid">63%</strong> &nbsp;<small class="has-text-grey">(32&thinsp;/&thinsp;51)</small> &nbsp;vs fine-tuned + prompt: <strong class="result-pass">100%</strong></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Table center <small class="has-text-grey">(5/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_table_center/0b08e2f9-490a-4db9-b20b-1c6ab317e1bc_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Next to plate <small class="has-text-grey">(5/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_next_to_plate/9426e5d7-db33-4812-95ee-95afa02358ad_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Next to ramekin <small class="has-text-grey">(1/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_next_to_ramekin/2f25aa04-4ae9-4677-ba53-c95dfd39a3a6_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Next to cookie box <small class="has-text-grey">(5/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_next_to_cookie_box/3aaac635-fa83-4a75-9ab6-3cc6e1fa41bd_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Between plate &amp; ramekin <small class="has-text-grey">(5/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_between_plate_ramekin/0714173f-b175-4596-8dc5-852ca36750b1_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">On ramekin <small class="has-text-grey">(5/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_on_ramekin/3ba8b545-a0c2-4a70-b98b-0897cc6ff36f_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">On cookie box <small class="has-text-grey">(3/6)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_on_cookie_box/05d9db5b-b47c-4b76-b261-049302af0e8f_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">On stove <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_on_stove/3753a79f-4e0f-49ab-8d6c-ee4f7cd63c8c_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">On wooden cabinet <small class="has-text-grey">(3/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_on_wooden_cabinet/39aea056-fc95-463d-ab77-4f70255d274d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">In top drawer <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_spatial/bowl_top_drawer/286e5c9f-e26f-4ed8-a70a-550ff2fd6443_s0.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIBERO-Object ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Object &mdash; Fine-Tuned</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-pass">97%</strong> &nbsp;<small class="has-text-grey">(97&thinsp;/&thinsp;100)</small></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Alphabet soup <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/alphabet_soup/07396b5c-338d-4f61-90ce-8624bb95f567_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">BBQ sauce <small class="has-text-grey">(9/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/bbq_sauce/0052a52c-19ed-4953-8d7f-7a8008f48bca_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned" style="color:#c0392b;">Butter <small class="has-text-grey">(8/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/butter/0913e65d-408f-4a49-a18c-9d63532eb46b_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Chocolate pudding <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/chocolate_pudding/2be226ba-1cfe-4f53-a730-89cb718bd96c_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Cream cheese <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/cream_cheese/47d3ec63-4f70-4fbe-b05f-5f0243eec07d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Ketchup <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/ketchup/0c74efd3-56bd-4a2c-981a-ae7af511ffcd_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Milk <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/milk/175f0517-b089-462b-93f7-a93d26c5bbfc_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Orange juice <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/orange_juice/2612595a-7f08-432d-9492-5963ffa6923a_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Salad dressing <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/salad_dressing/029edbaf-83ec-4fb6-a3a5-b9610bae854f_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Tomato sauce <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/tomato_sauce/2ea1bb18-ec18-43b5-b4f7-04304ad408f5_s1.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIBERO-Goal ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Goal &mdash; Fine-Tuned</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-pass">98%</strong> &nbsp;<small class="has-text-grey">(98&thinsp;/&thinsp;100)</small></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Open middle drawer <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/open_middle_drawer/22862e3d-132e-4a82-81c4-82778d20d911_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Open top drawer, put bowl <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/open_top_drawer_put_bowl/07eee448-efa7-485b-92ff-b602a624d5e7_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Bowl on plate <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/bowl_on_plate/006a4b69-596e-41ea-95a8-0f2dccb0c5b4_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Bowl on stove <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/bowl_on_stove/2e40b558-4492-4f66-ba97-4005a6d1646d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Bowl on cabinet <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/bowl_on_cabinet/144d9653-6819-4ae6-a8d9-cb00ad351c26_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Cream cheese in bowl <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/cream_cheese_in_bowl/13b187ff-48bc-4543-ac0a-838dcf2eed46_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Wine on rack <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/wine_on_rack/0d8e6a49-db5b-4a88-86cd-7d3e2070e0d0_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Wine on cabinet <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/wine_on_cabinet/1a8eebb6-9498-4997-afd6-2f6bfd485e40_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Turn on stove <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/turn_on_stove/10650067-6c09-4675-ac54-532166b55915_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned" style="color:#c0392b;">Push plate to stove <small class="has-text-grey">(8/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/push_plate_stove/0894704b-2a6f-444b-9665-5d5340aa72de_s1.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
