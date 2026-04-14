@@ -160,12 +160,20 @@
     </p>
 
     <div class="content" style="margin-top:1.5rem; padding:1rem 1.5rem; background:#fff8e1; border-left:4px solid #f0a500; border-radius:0 6px 6px 0;">
-      <p><strong>Observation — failures are timing issues, not task failures.</strong>
-        Inspection of failing episodes reveals the model understands the task and
-        executes the correct sequence of motions in every case. Failures occur because
-        the episode times out before the motion completes — the robot is still on track
-        when the episode ends. This suggests the drop from reference scores is an
-        artifact of episode length limits rather than a genuine capability gap.
+      <p><strong>Observation 1 — scene overfitting, not prompt following.</strong>
+        Without any language input, the model still moves to the correct region, picks
+        up an object, and executes a plausible manipulation sequence. The physical
+        behaviour is driven by scene familiarity, not the language prompt. The prompt's
+        role is narrower: it disambiguates <em>which</em> object to pick up. Remove the
+        prompt and scores collapse — not because the arm stops moving, but because it
+        grabs the wrong object. High benchmark accuracy therefore reflects memorization
+        of the training scenes, not genuine language-conditioned generalization.
+      </p>
+      <p style="margin-bottom:0;"><strong>Observation 2 — fine-tuned score drop is episode timeouts.</strong>
+        Inspection of failing fine-tuned episodes shows the model executes the correct
+        motion sequence in every case; failures occur because the episode times out
+        before the motion completes. The drop from reference scores is an artifact of
+        episode length limits, not a capability gap.
       </p>
     </div>
   </div>
@@ -272,6 +280,54 @@
       </div>
     </div>
 
+    <!-- ── LIBERO-Object Fine-Tuned ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Object &mdash; Fine-Tuned</h3>
+      <p class="task-meta">Fine-tuned: <strong class="result-pass">97%</strong> &nbsp;<small class="has-text-grey">(97&thinsp;/&thinsp;100)</small></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Alphabet soup <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/alphabet_soup/07396b5c-338d-4f61-90ce-8624bb95f567_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">BBQ sauce <small class="has-text-grey">(9/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/bbq_sauce/0052a52c-19ed-4953-8d7f-7a8008f48bca_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned" style="color:#c0392b;">Butter <small class="has-text-grey">(8/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/butter/0913e65d-408f-4a49-a18c-9d63532eb46b_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Chocolate pudding <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/chocolate_pudding/2be226ba-1cfe-4f53-a730-89cb718bd96c_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Cream cheese <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/cream_cheese/47d3ec63-4f70-4fbe-b05f-5f0243eec07d_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Ketchup <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/ketchup/0c74efd3-56bd-4a2c-981a-ae7af511ffcd_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Milk <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/milk/175f0517-b089-462b-93f7-a93d26c5bbfc_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Orange juice <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/orange_juice/2612595a-7f08-432d-9492-5963ffa6923a_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Salad dressing <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/salad_dressing/029edbaf-83ec-4fb6-a3a5-b9610bae854f_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label tag-finetuned">Tomato sauce <small class="has-text-grey">(10/10)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/tomato_sauce/2ea1bb18-ec18-43b5-b4f7-04304ad408f5_s1.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
     <!-- ── LIBERO-Object No Prompt ── -->
     <div class="task-block">
       <h3 class="title is-4">LIBERO-Object &mdash; No Prompt</h3>
@@ -320,102 +376,6 @@
       </div>
     </div>
 
-    <!-- ── LIBERO-Object ── -->
-    <div class="task-block">
-      <h3 class="title is-4">LIBERO-Object &mdash; Fine-Tuned</h3>
-      <p class="task-meta">Fine-tuned: <strong class="result-pass">97%</strong> &nbsp;<small class="has-text-grey">(97&thinsp;/&thinsp;100)</small></p>
-      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Alphabet soup <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/alphabet_soup/07396b5c-338d-4f61-90ce-8624bb95f567_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">BBQ sauce <small class="has-text-grey">(9/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/bbq_sauce/0052a52c-19ed-4953-8d7f-7a8008f48bca_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned" style="color:#c0392b;">Butter <small class="has-text-grey">(8/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/butter/0913e65d-408f-4a49-a18c-9d63532eb46b_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Chocolate pudding <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/chocolate_pudding/2be226ba-1cfe-4f53-a730-89cb718bd96c_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Cream cheese <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/cream_cheese/47d3ec63-4f70-4fbe-b05f-5f0243eec07d_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Ketchup <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/ketchup/0c74efd3-56bd-4a2c-981a-ae7af511ffcd_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Milk <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/milk/175f0517-b089-462b-93f7-a93d26c5bbfc_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Orange juice <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/orange_juice/2612595a-7f08-432d-9492-5963ffa6923a_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Salad dressing <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/salad_dressing/029edbaf-83ec-4fb6-a3a5-b9610bae854f_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label tag-finetuned">Tomato sauce <small class="has-text-grey">(10/10)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/finetuned/libero_object/tomato_sauce/2ea1bb18-ec18-43b5-b4f7-04304ad408f5_s1.mp4" type="video/mp4"></video>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── LIBERO-Goal ── -->
-    <div class="task-block">
-      <h3 class="title is-4">LIBERO-Goal &mdash; No Prompt</h3>
-      <p class="task-meta">No prompt: <strong class="result-fail">14%</strong> &nbsp;<small class="has-text-grey">(7&thinsp;/&thinsp;50)</small> &nbsp;vs fine-tuned + prompt: <strong class="result-pass">98%</strong></p>
-      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Open middle drawer <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/open_middle_drawer/1b19c591-416b-40e6-b680-b16a7e92e2b1_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Open top drawer, put bowl <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/open_top_drawer_put_bowl/24ae2295-cc94-4530-95b2-7a23cc38b3b5_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#6c3483;">Bowl on plate <small class="has-text-grey">(4/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_plate/0777854a-ad50-45f5-b50c-e1f9e8dc26b5_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Bowl on stove <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_stove/0febc01e-5883-4de0-bdf6-cbf74fe6bdfc_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#6c3483;">Bowl on cabinet <small class="has-text-grey">(3/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_cabinet/84c91be1-7ec1-41aa-ae8f-0484ce0bf2d7_s1.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Cream cheese in bowl <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/cream_cheese_in_bowl/0be9b476-5ffb-4442-8921-b2985a983579_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Wine on rack <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/wine_on_rack/632076ed-9dee-4b06-a99b-a3e24ceb20ed_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Wine on cabinet <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/wine_on_cabinet/8734cd55-42f0-4cd4-a089-f0038d03c594_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Turn on stove <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/turn_on_stove/24fc2e4a-497c-41bd-b8d5-d8fe38ea62bc_s0.mp4" type="video/mp4"></video>
-        </div>
-        <div class="task-grid-item">
-          <p class="vid-label" style="color:#c0392b;">Push plate to stove <small class="has-text-grey">(0/5)</small></p>
-          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/push_plate_stove/07246a5d-5953-4d13-90b3-0511401e316d_s0.mp4" type="video/mp4"></video>
-        </div>
-      </div>
-    </div>
-
     <!-- ── LIBERO-Goal Fine-Tuned ── -->
     <div class="task-block">
       <h3 class="title is-4">LIBERO-Goal &mdash; Fine-Tuned</h3>
@@ -460,6 +420,54 @@
         <div class="task-grid-item">
           <p class="vid-label tag-finetuned" style="color:#c0392b;">Push plate to stove <small class="has-text-grey">(8/10)</small></p>
           <video controls muted loop playsinline><source src="static/videos/finetuned/libero_goal/push_plate_stove/0894704b-2a6f-444b-9665-5d5340aa72de_s1.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIBERO-Goal No Prompt ── -->
+    <div class="task-block">
+      <h3 class="title is-4">LIBERO-Goal &mdash; No Prompt</h3>
+      <p class="task-meta">No prompt: <strong class="result-fail">14%</strong> &nbsp;<small class="has-text-grey">(7&thinsp;/&thinsp;50)</small> &nbsp;vs fine-tuned + prompt: <strong class="result-pass">98%</strong></p>
+      <div class="task-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.75rem; align-items:end;">
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Open middle drawer <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/open_middle_drawer/1b19c591-416b-40e6-b680-b16a7e92e2b1_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Open top drawer, put bowl <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/open_top_drawer_put_bowl/24ae2295-cc94-4530-95b2-7a23cc38b3b5_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Bowl on plate <small class="has-text-grey">(4/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_plate/0777854a-ad50-45f5-b50c-e1f9e8dc26b5_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Bowl on stove <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_stove/0febc01e-5883-4de0-bdf6-cbf74fe6bdfc_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#6c3483;">Bowl on cabinet <small class="has-text-grey">(3/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/bowl_on_cabinet/84c91be1-7ec1-41aa-ae8f-0484ce0bf2d7_s1.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Cream cheese in bowl <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/cream_cheese_in_bowl/0be9b476-5ffb-4442-8921-b2985a983579_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Wine on rack <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/wine_on_rack/632076ed-9dee-4b06-a99b-a3e24ceb20ed_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Wine on cabinet <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/wine_on_cabinet/8734cd55-42f0-4cd4-a089-f0038d03c594_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Turn on stove <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/turn_on_stove/24fc2e4a-497c-41bd-b8d5-d8fe38ea62bc_s0.mp4" type="video/mp4"></video>
+        </div>
+        <div class="task-grid-item">
+          <p class="vid-label" style="color:#c0392b;">Push plate to stove <small class="has-text-grey">(0/5)</small></p>
+          <video controls muted loop playsinline><source src="static/videos/noprompt/libero_goal/push_plate_stove/07246a5d-5953-4d13-90b3-0511401e316d_s0.mp4" type="video/mp4"></video>
         </div>
       </div>
     </div>
