@@ -70,12 +70,17 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We evaluate GR00T N1.6 on the <strong>Franka Panda</strong> embodiment across
-            multiple simulation environments, comparing the zero-shot base model
-            (<code>nvidia/GR00T-N1.6-3B</code>) against
-            <code>0xAnkitSingh/GR00T-N1.6-LIBERO</code>, fine-tuned on the
-            <a href="https://libero-project.github.io/">LIBERO</a> benchmark.
-            Current evaluations are run in LIBERO sim; additional simulators may be added.
+            We probe whether high scores on the <a href="https://libero-project.github.io/">LIBERO</a>
+            benchmark reflect genuine manipulation capability or benchmark-specific memorization.
+            We take <code>0xAnkitSingh/GR00T-N1.6-LIBERO</code> — GR00T N1.6 fine-tuned on
+            LIBERO — and evaluate it in two settings: (1) inside LIBERO itself, with and without
+            language prompts, to test whether performance survives removal of the language signal;
+            (2) on <a href="https://robocasa.ai/">RoboCasa</a> tasks using the same Franka Panda
+            arm, to test whether performance survives a change of environment.
+            We find that scores collapse in both cases, indicating the model has overfit to the
+            benchmark scenes rather than learning transferable skills.
+            For completeness we also confirm that the zero-shot base model
+            (<code>nvidia/GR00T-N1.6-3B</code>) fails on all tasks without fine-tuning.
           </p>
         </div>
       </div>
@@ -92,11 +97,12 @@
         <table class="table is-fullwidth is-bordered is-striped">
           <thead><tr><th>Component</th><th>Detail</th></tr></thead>
           <tbody>
-            <tr><td>Simulation</td><td>LIBERO (current); additional simulators planned</td></tr>
-            <tr><td>Robot</td><td>Franka Panda</td></tr>
+            <tr><td>Simulation environments</td><td>LIBERO, RoboCasa</td></tr>
+            <tr><td>Robot</td><td>Franka Panda (LIBERO); PandaOmron fixed-base (RoboCasa)</td></tr>
+            <tr><td>Primary model</td><td><code>0xAnkitSingh/GR00T-N1.6-LIBERO</code> &mdash; fine-tuned on LIBERO</td></tr>
             <tr><td>Zero-shot model</td><td><code>nvidia/GR00T-N1.6-3B</code> &mdash; 3B params, no task-specific training</td></tr>
-            <tr><td>Fine-tuned model</td><td><code>0xAnkitSingh/GR00T-N1.6-LIBERO</code> &mdash; fine-tuned on LIBERO (Franka Panda)</td></tr>
-            <tr><td>Episodes per task</td><td>10 per model</td></tr>
+            <tr><td>LIBERO conditions</td><td>Fine-tuned + prompt; fine-tuned, no prompt</td></tr>
+            <tr><td>Episodes per task</td><td>10 (LIBERO fine-tuned); 5 (no-prompt); 10 (RoboCasa)</td></tr>
             <tr><td>Hardware</td><td>AWS g5.2xlarge &mdash; NVIDIA A10G 24 GB, 32 GB RAM</td></tr>
           </tbody>
         </table>
