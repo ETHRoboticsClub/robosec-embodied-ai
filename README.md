@@ -7,6 +7,7 @@ Central hub for Embodied AI experiments within the Robotics Security Division: f
 | ID | Title | Status |
 |----|-------|--------|
 | [Experiment 1](experiment_1/README.md) | Test scene overfitting in robot foundation models | In progress |
+| [Experiment 2](experiment_2/README.md) | Latent representation geometry at the S2→S1 interface of GR00T N1.6 | In progress |
 
 
 ## Structure
