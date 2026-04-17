@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GR00T N1.6: Latent Representations at the System 2→System 1 Interface</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            GR00T N1.6: Task vs Scene Geometry<br>at the System&nbsp;2&thinsp;&rarr;&thinsp;System&nbsp;1 Interface
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/noemacee">Noé Macé</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Fine-Tuned Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="../"
+                   class="external-link button is-normal is-rounded is-light">
+                  <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                  <span>Experiment 2</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABSTRACT ─────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            <strong>GR00T N1.6</strong> is a hierarchical Vision-Language-Action model with two
+            coupled subsystems: a high-level <em>System&nbsp;2</em> (Eagle2 VLM backbone) that
+            processes observations and language instructions, and a low-level <em>System&nbsp;1</em>
+            (flow-matching diffusion policy) that generates actions.
+            System&nbsp;2 passes conditioning tokens to System&nbsp;1 at each step &mdash;
+            a bottleneck through which all semantic and visual information must flow.
+          </p>
+          <p>
+            We probe these interface tokens during rollouts on four tabletop manipulation tasks
+            in <a href="https://simpler-env.github.io/">SimplerEnv</a>
+            to ask: <strong>does the S2&thinsp;&rarr;&thinsp;S1 conditioning representation
+            organize around task identity or scene identity?</strong>
+            We study <code>nvidia/GR00T-N1.6-fractal</code>, a model fine-tuned on the Fractal
+            dataset that generalizes reliably across scene variants (see Experiment&nbsp;1).
+            If its latent space clusters by task &mdash; grouping same-task embeddings from
+            different scenes closer than different-task embeddings from the same scene &mdash;
+            the interface encodes <em>what to do</em> rather than <em>where you are</em>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHITECTURE & HOOK POINT ────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Architecture &amp; Hook Point</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-5">
+
+        <figure style="margin:0 0 0.5rem 0;">
+          <img src="static/img/gr00t_architecture.png"
+               alt="GR00T N1.6 architecture: System 2 (VLM) → S2→S1 interface → System 1 (Diffusion Transformer)"
+               style="width:100%; border-radius:8px; border:1px solid #e0e0e0;">
+        </figure>
+        <p class="arch-hook-label" style="margin-top:0.5rem;">
+          <i class="fas fa-crosshairs"></i>&nbsp; Hook point &mdash; conditioning tokens extracted at the S2&thinsp;&rarr;&thinsp;S1 interface
+        </p>
+
+      </div>
+
+      <div class="column is-7">
+        <div class="content">
+          <p>
+            The conditioning tokens are extracted using a
+            <code>register_forward_hook</code> on the final layer of the System&nbsp;2
+            transformer before its output is consumed by System&nbsp;1&rsquo;s cross-attention.
+            Each rollout step produces one embedding vector.
+          </p>
+          <p>
+            We collect embeddings across:
+          </p>
+          <ul>
+            <li><strong>4 tasks</strong> &mdash; Pick Coke Can, Close Drawer, Open Drawer, Move Near</li>
+            <li><strong>Scene variants</strong> &mdash; SimplerEnv provides per-task visual variants
+              (object placement, background, lighting)</li>
+    <li><strong>N steps per episode</strong> &mdash; sampled uniformly per rollout</li>
+          </ul>
+          <p>
+            Each embedding is labeled with its <em>task</em> and <em>scene variant</em>.
+            Analysis then asks: which label dominates the latent geometry?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HYPOTHESES ────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Hypotheses</h2>
+    <div class="columns">
+
+      <div class="column">
+        <div class="hypothesis-card h-task">
+          <div class="hypothesis-label" style="color:#1a3c6b;">H1 — Task clustering (expected)</div>
+          <p>
+            The conditioning tokens cluster by <strong>task</strong> regardless of scene variant.
+            Same-task embeddings drawn from different scene variants are closer to each other
+            than different-task embeddings drawn from the same scene.
+            The interface encodes <em>what to do</em>; language conditioning is geometrically
+            active in the bottleneck.
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="hypothesis-card h-scene">
+          <div class="hypothesis-label" style="color:#6b1a5a;">H2 — Scene clustering (alternative)</div>
+          <p>
+            The conditioning tokens cluster by <strong>visual scene</strong>.
+            Scene identity dominates the interface embedding over task semantics.
+            The model encodes <em>where you are</em> rather than <em>what to do</em>,
+            and task structure is absent or weak in the bottleneck.
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="callout" style="margin-top:1.5rem;">
+      <strong>Why fractal?</strong> <code>nvidia/GR00T-N1.6-fractal</code> generalizes across
+      scene variants in SimplerEnv (Experiment&nbsp;1), so it is the right model to probe:
+      any task-clustered geometry we find is a genuine property of the learned bottleneck,
+      not an artifact of a model that fails everywhere.
+    </div>
+  </div>
+</section>
+
+<!-- ─── SETUP ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Setup</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead><tr><th>Component</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Simulation</td><td>SimplerEnv (MuJoCo, headless via EGL)</td></tr>
+            <tr><td>Robot</td><td>Google Robot (<code>OXE_GOOGLE</code> embodiment)</td></tr>
+            <tr><td>Model</td><td><code>nvidia/GR00T-N1.6-fractal</code> &mdash; fine-tuned on OXE Fractal</td></tr>
+            <tr><td>Task (current)</td><td>Pick Coke Can &mdash; multi-task coming next</td></tr>
+            <tr><td>Action chunking</td><td><code>ac1</code> &mdash; 1 action executed per backbone call, 8 predicted</td></tr>
+            <tr><td>Hook point</td><td>S2&thinsp;&rarr;&thinsp;S1 conditioning output, every backbone call</td></tr>
+            <tr><td>Hardware</td><td>AWS g5.2xlarge &mdash; NVIDIA A10G 24 GB, 32 GB RAM</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DATA STRUCTURE ────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Data Structure</h2>
+    <p style="color:#555; margin-bottom:1.5rem;">
+      Each episode saves one <code>.npz</code> file alongside its video.
+      The two key arrays per file:
+    </p>
+
+    <div class="columns">
+
+      <div class="column">
+        <div class="hypothesis-card h-task" style="border-left-color:#d68910; background:#fff9ec;">
+          <div class="hypothesis-label" style="color:#d68910; margin-bottom:0.75rem;">backbone_features</div>
+          <code style="font-size:0.95rem;">(N_calls, 1, 107, 2048) &nbsp;float32</code>
+          <p style="margin-top:0.75rem; font-size:0.9rem; color:#555;">
+            The S2&thinsp;&rarr;&thinsp;S1 conditioning output at every backbone call.
+            <strong>107 tokens</strong> — vision patch tokens + language tokens concatenated.
+            <strong>2048</strong> — embedding dimension.
+            One row per backbone invocation during the episode.
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="hypothesis-card h-task" style="border-left-color:#1a6b2b; background:#effff3;">
+          <div class="hypothesis-label" style="color:#1a6b2b; margin-bottom:0.75rem;">actions_action.{x,y,z,roll,pitch,yaw,gripper}</div>
+          <code style="font-size:0.95rem;">(N_calls, 1, 8, 1) &nbsp;float32 &nbsp;&times;&thinsp;7</code>
+          <p style="margin-top:0.75rem; font-size:0.9rem; color:#555;">
+            The action chunk decoded by System&nbsp;1 at each backbone call.
+            <strong>8 steps</strong> predicted per call; only step 0 is executed (<code>ac1</code>).
+            <strong>7 DOFs</strong> — Cartesian EEF (x, y, z, roll, pitch, yaw) + gripper.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:1rem;">
+      For analysis we flatten each action chunk to a <strong>56-dim vector</strong> (8&thinsp;&times;&thinsp;7 DOFs)
+      and mean-pool the backbone tokens to a <strong>2048-dim vector</strong>.
+      Both are L2-normalised before computing cosine similarity.
+    </div>
+  </div>
+</section>
+
+<!-- ─── CURRENT DATA ──────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Current Data</h2>
+    <p style="color:#555; margin-bottom:1.5rem;">
+      All runs are on <strong>Pick Coke Can</strong> with <code>nvidia/GR00T-N1.6-fractal</code>.
+      Two seeds — same environment initialisation within each seed, independent rollouts across runs.
+    </p>
+
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead>
+            <tr><th>Seed</th><th>Runs</th><th>Success</th><th>N calls range</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>seed42</code></td>
+              <td>3</td>
+              <td class="result-pass">3 / 3</td>
+              <td>34 &ndash; 190</td>
+              <td>Initial exploration &mdash; no action data</td>
+            </tr>
+            <tr>
+              <td><code>seed42</code></td>
+              <td>3</td>
+              <td class="result-pass">3 / 3</td>
+              <td>34 &ndash; 190</td>
+              <td>Re-run with action chunks saved</td>
+            </tr>
+            <tr>
+              <td><code>seed1</code></td>
+              <td>20</td>
+              <td><span class="result-pass">17</span> / <span class="result-fail">3</span></td>
+              <td>19 &ndash; 300</td>
+              <td>Main batch &mdash; backbone features + action chunks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRELIMINARY EXPLORATION ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Preliminary Exploration</h2>
+    <p style="color:#555; margin-bottom:2rem;">
+      Single-task (Pick Coke Can), single-seed (seed1), 20 runs.
+      These plots probe the relationship between action outputs and backbone representations
+      before scaling to multiple tasks.
+    </p>
+
+    <!-- N calls -->
+    <h3 class="title is-4">Episode length variability</h3>
+    <p style="color:#555; margin-bottom:1rem;">
+      Number of backbone calls per run. Each call = one observation processed, one 8-step
+      action chunk output, one action executed. Failures hit the 300-call episode limit.
+      Successful episodes vary from 19 to 231 calls &mdash; the model finds the object at very
+      different speeds despite the same seed.
+    </p>
+    <img src="data/seed1_ncalls.png"
+         style="width:100%; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:2.5rem;">
+
+    <!-- Action sim vs Latent sim -->
+    <h3 class="title is-4">Action similarity vs Latent similarity</h3>
+    <p style="color:#555; margin-bottom:1rem;">
+      For every pair of runs we compute the full N<sub>A</sub>&thinsp;&times;&thinsp;N<sub>B</sub>
+      cosine similarity matrix in both action space (56-dim chunk) and latent space (2048-dim
+      mean-pooled backbone). The <strong>left scatter</strong> plots every individual call-pair;
+      the <strong>right histogram</strong> shows how spread out each space is.
+    </p>
+    <p style="color:#555; margin-bottom:1rem;">
+      The key observation: action similarity spans nearly the full range
+      (&minus;0.55 &ndash; 1.0, &sigma;&thinsp;=&thinsp;0.37) while latent similarity
+      stays tightly clustered (0.55 &ndash; 1.0, &sigma;&thinsp;=&thinsp;0.049).
+      Pearson r between the two is <strong>0.16</strong> &mdash;
+      the backbone produces near-identical representations regardless of the action chunk output.
+    </p>
+    <img src="data/seed1_act_lat_scatter.png"
+         style="width:100%; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:2rem;">
+
+    <!-- Next steps -->
+    <div class="callout">
+      <strong>Next:</strong> collect the same data across all 4 tasks and multiple scene variants,
+      then run UMAP on the backbone representations coloured by task vs scene to answer H1 vs H2.
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

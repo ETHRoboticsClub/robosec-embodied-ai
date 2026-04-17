@@ -1,0 +1,19 @@
+# Seed42 exploration runs (superseded by seed1)
+sim_eval_videos_GR00T-N1.6-fractal_ac1_seed42*/
+
+# Initial batch — no action data
+sim_eval_videos_GR00T-N1.6-fractal_ac1_b285de39*/
+
+# Personal exploration pages
+explore_*.html
+
+# Scratch plots
+*_viz.png
+analysis_*.png
+seed42_*.png
+act_lat_scatter.png
+
+.DS_Store
+
+# Large latent files — kept locally only
+*.npz

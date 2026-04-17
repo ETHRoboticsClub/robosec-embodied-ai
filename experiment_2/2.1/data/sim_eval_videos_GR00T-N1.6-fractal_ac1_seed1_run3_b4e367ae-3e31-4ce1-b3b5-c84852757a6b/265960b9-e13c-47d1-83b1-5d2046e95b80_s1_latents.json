@@ -1,0 +1,2983 @@
+{
+  "video": "/tmp/sim_eval_videos_GR00T-N1.6-fractal_ac1_seed1_run3_b4e367ae-3e31-4ce1-b3b5-c84852757a6b/265960b9-e13c-47d1-83b1-5d2046e95b80_s1.mp4",
+  "success": true,
+  "n_backbone_calls": 65,
+  "n_actions_output": 520,
+  "backbone_features_shape": {
+    "N_calls": 65,
+    "B": 1,
+    "T_seq": 107,
+    "embed_dim": 2048
+  },
+  "actions_shape": {
+    "action.x": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.y": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.z": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.roll": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.pitch": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.yaw": [
+      65,
+      1,
+      8,
+      1
+    ],
+    "action.gripper": [
+      65,
+      1,
+      8,
+      1
+    ]
+  },
+  "calls": [
+    {
+      "call_idx": 0,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 1,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 2,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 3,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 4,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 5,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 6,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 7,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 8,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 9,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 10,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 11,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 12,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 13,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 14,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 15,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 16,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 17,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 18,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 19,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 20,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 21,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 22,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 23,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 24,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 25,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 26,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 27,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 28,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 29,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 30,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 31,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 32,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 33,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 34,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 35,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 36,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 37,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 38,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 39,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 40,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 41,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 42,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 43,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 44,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 45,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 46,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 47,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 48,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 49,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 50,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 51,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 52,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 53,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 54,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 55,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 56,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 57,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 58,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 59,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 60,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 61,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 62,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 63,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    },
+    {
+      "call_idx": 64,
+      "backbone_features_shape": [
+        1,
+        107,
+        2048
+      ],
+      "actions_shape": {
+        "action.x": [
+          1,
+          8,
+          1
+        ],
+        "action.y": [
+          1,
+          8,
+          1
+        ],
+        "action.z": [
+          1,
+          8,
+          1
+        ],
+        "action.roll": [
+          1,
+          8,
+          1
+        ],
+        "action.pitch": [
+          1,
+          8,
+          1
+        ],
+        "action.yaw": [
+          1,
+          8,
+          1
+        ],
+        "action.gripper": [
+          1,
+          8,
+          1
+        ]
+      }
+    }
+  ]
+}
