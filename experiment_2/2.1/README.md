@@ -48,17 +48,32 @@ Same hardware and environment setup as Experiment 1.1 (see [`../1.1/README.md`](
 pip install umap-learn matplotlib seaborn
 ```
 
-### Extraction script (TBD)
+### Inference script
+
+Runs 20 independent episodes, one at a time, saving videos and latents under `/tmp/latents/`:
 
 ```bash
-# Run with hook enabled — saves embeddings to embeddings/{model}/{task}/
-uv run python gr00t/eval/extract_latents.py \
-    --model-path nvidia/GR00T-N1.6-fractal \
-    --embodiment-tag OXE_GOOGLE \
-    --env_name google_robot_pick_coke_can \
-    --n_episodes 20 \
-    --output-dir embeddings/finetuned/pick_coke_can
+for RUN in $(seq 1 20); do
+    MUJOCO_GL=egl PYOPENGL_PLATFORM=egl VK_ICD_FILENAMES=/etc/vulkan/icd.d/nvidia_icd.json \
+    gr00t/eval/sim/SimplerEnv/simpler_uv/.venv/bin/python \
+      gr00t/eval/rollout_policy.py \
+      --model_path nvidia/GR00T-N1.6-fractal \
+      --env_name simpler_env_google/google_robot_pick_coke_can \
+      --n_episodes 1 \
+      --n_action_steps 1 \
+      --n_envs 1 \
+      --max_episode_steps 300 \
+      --env_seed 1 \
+      --run_tag run$RUN \
+      --latent_log_dir /tmp/latents
+done
 ```
+
+Key flags:
+- `--n_action_steps 1` — execute only the first predicted step of each 8-step action chunk (ac1)
+- `--env_seed 1` — controls scene randomisation; `seed1` in data directory names
+- `--run_tag run$RUN` — injected into output directory names for traceability
+- `--latent_log_dir` — destination for per-timestep latent npz + json files
 
 ### Analysis script (TBD)
 
