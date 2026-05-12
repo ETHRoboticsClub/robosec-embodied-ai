@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GR00T N1.6: Task vs Target Position Decoding on the Full 6-Layout Suite</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <style>
+    .mini-table th { background: #f5f5f5; }
+    .next-step-card {
+      border: 1px solid #ead9a8;
+      border-left: 4px solid #d68910;
+      border-radius: 8px;
+      background: #fff9ec;
+      padding: 1.25rem 1.5rem;
+      height: 100%;
+    }
+    .result-strong { color: #1a6b2b; font-weight: 700; }
+    .result-mid { color: #d68910; font-weight: 700; }
+    .section-note { color: #666; }
+    .math-block {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            GR00T N1.6: Task vs Target Position Decoding<br>on the Full 6-Layout Suite
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/noemacee">Noé Macé</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="../"
+                   class="external-link button is-normal is-rounded is-light">
+                  <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                  <span>Experiment 2</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate whether the frozen <strong>System 2→System 1</strong> boundary of
+            <code>nvidia/GR00T-N1.6-fractal</code> linearly separates
+            <strong>target object</strong> and <strong>target position</strong> on a
+            controlled tabletop suite. The suite spans <strong>6 clean object-layout
+            permutations</strong> and <strong>3 target objects</strong>
+            (bottle, coke, orange), with the final dataset containing
+            <strong>18 successful sequences</strong> and <strong>376 sampled latent points</strong>.
+          </p>
+          <p>
+            The main result is positive for both labels. Under leave-one-layout-out
+            evaluation, task decoding is nearly perfect:
+            <code>0.998 / 1.000 / 0.986</code> for pooled all / image / text token
+            slices. Target-position decoding is also strong:
+            <code>0.964 / 0.955 / 0.939</code>. This corrects the earlier
+            interpretation from the partial left/right-only study:
+            once the clean permutation table is complete, the boundary carries a
+            strong object/task code as well as a strong position code.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Layout Suite</h2>
+    <p class="has-text-centered section-note" style="margin-bottom:1.5rem;">
+      Six clean permutations of bottle / coke / orange were used. Existing bottle
+      and orange runs were reused; only the missing <code>pick_coke</code> target
+      had to be collected.
+    </p>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <figure>
+          <img src="static/img/contact_sheet_full6.png"
+               alt="Six clean object-layout permutations for the observer experiment"
+               style="width:100%; border-radius:8px; border:1px solid #e0e0e0;">
+        </figure>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:1rem;">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped mini-table">
+          <thead>
+            <tr>
+              <th>Layout code</th>
+              <th>Left / Middle / Right</th>
+              <th>`pick_bottle`</th>
+              <th>`pick_coke`</th>
+              <th>`pick_orange`</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>OCB</code></td><td>orange / coke / bottle</td><td>right</td><td>middle</td><td>left</td></tr>
+            <tr><td><code>BCO</code></td><td>bottle / coke / orange</td><td>left</td><td>middle</td><td>right</td></tr>
+            <tr><td><code>BOC</code></td><td>bottle / orange / coke</td><td>left</td><td>right</td><td>middle</td></tr>
+            <tr><td><code>COB</code></td><td>coke / orange / bottle</td><td>right</td><td>left</td><td>middle</td></tr>
+            <tr><td><code>OBC</code></td><td>orange / bottle / coke</td><td>middle</td><td>right</td><td>left</td></tr>
+            <tr><td><code>CBO</code></td><td>coke / bottle / orange</td><td>middle</td><td>left</td><td>right</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">How the Classifier Was Trained</h2>
+    <p class="has-text-centered section-note" style="margin-bottom:1.5rem;">
+      Both classifiers use the same frozen latent dataset. Only the target label changes.
+    </p>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped mini-table">
+          <tbody>
+            <tr><td>Model state</td><td>GR00T is frozen; no policy fine-tuning during probing</td></tr>
+            <tr><td>Input to the probe</td><td>One pooled S2→S1 boundary feature vector from one sampled rollout timestep</td></tr>
+            <tr><td>Dataset</td><td>18 successful sequences, 376 sampled latent points</td></tr>
+            <tr><td>Labels</td><td><code>task ∈ {bottle, coke, orange}</code> or <code>target_position ∈ {left, middle, right}</code></td></tr>
+            <tr><td>Probe</td><td>Single linear layer trained with class-balanced cross-entropy</td></tr>
+            <tr><td>Optimizer</td><td><code>AdamW</code>, 300 epochs, learning rate <code>0.05</code>, weight decay <code>1e-4</code></td></tr>
+            <tr><td>Feature variants</td><td><code>pooled_all</code>, <code>pooled_image</code>, <code>pooled_text</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="callout">
+          The model itself is never retrained here. The only learned component is
+          the small linear probe placed on top of the frozen boundary latent.
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="math-block">x ∈ R^d   = standardized pooled boundary latent
+z         = W x + b
+p(y=c|x)  = exp(z_c) / Σ_j exp(z_j)
+L(x,y)    = - α_y log p(y|x)</div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <p class="section-note">
+          Here <code>W ∈ R^(K×d)</code> and <code>b ∈ R^K</code> are the learned
+          parameters, <code>K = 3</code> classes, and <code>α_y</code> is the
+          class weight used in the cross-entropy loss.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">How It Was Tested</h2>
+    <p class="has-text-centered section-note" style="margin-bottom:1.5rem;">
+      The main metric is leave-one-layout-out accuracy.
+    </p>
+    <div class="columns">
+      <div class="column">
+        <div class="next-step-card">
+          <strong>1. Hold out one layout</strong>
+          <p class="section-note">
+            Choose one of the 6 layouts, for example <code>OCB</code>, and remove
+            every sample from that layout from training.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="next-step-card">
+          <strong>2. Train on the other 5</strong>
+          <p class="section-note">
+            Fit the linear probe on samples from the remaining 5 layouts only.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="next-step-card">
+          <strong>3. Test on the hidden layout</strong>
+          <p class="section-note">
+            Evaluate only on the held-out layout, then repeat this once for each
+            of the 6 layouts and average the 6 accuracies.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="callout">
+          Example: if <code>OCB</code> is the held-out layout, the probe trains on
+          <code>BCO</code>, <code>BOC</code>, <code>COB</code>, <code>OBC</code>, and
+          <code>CBO</code>, and is tested only on <code>OCB</code>. This is
+          stricter than a random train/test split because the classifier must
+          generalize to a full object-layout permutation it never saw during
+          training.
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:0.75rem;">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped mini-table">
+          <thead>
+            <tr>
+              <th>Held-out layout</th>
+              <th><code>pick_bottle</code></th>
+              <th><code>pick_coke</code></th>
+              <th><code>pick_orange</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>OCB</code></td><td>6 successful episodes</td><td>6 successful episodes</td><td>5 successful episodes</td></tr>
+            <tr><td><code>BCO</code></td><td>6 successful episodes</td><td>4 successful episodes</td><td>6 successful episodes</td></tr>
+            <tr><td><code>BOC</code></td><td>6 successful episodes</td><td>3 successful episodes</td><td>6 successful episodes</td></tr>
+            <tr><td><code>COB</code></td><td>6 successful episodes</td><td>6 successful episodes</td><td>6 successful episodes</td></tr>
+            <tr><td><code>OBC</code></td><td>6 successful episodes</td><td>5 successful episodes</td><td>3 successful episodes</td></tr>
+            <tr><td><code>CBO</code></td><td>6 successful episodes</td><td>5 successful episodes</td><td>3 successful episodes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="callout">
+          So yes: every layout used at test time includes all three prompts,
+          <code>pick_bottle</code>, <code>pick_coke</code>, and
+          <code>pick_orange</code>. What varies by layout is only how many
+          successful episodes are available for each prompt.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Main Result</h2>
+    <p class="has-text-centered section-note" style="margin-bottom:1.5rem;">
+      Leave-one-layout-out mean accuracy across the 6 held-out layouts. The same
+      table already contains the image-token and text-token slice comparison.
+    </p>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <table class="table is-fullwidth is-bordered is-striped mini-table">
+          <thead>
+            <tr>
+              <th>Target</th>
+              <th>All tokens</th>
+              <th>Image token slice</th>
+              <th>Text token slice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>task</code></td>
+              <td class="result-strong">0.998</td>
+              <td class="result-strong">1.000</td>
+              <td class="result-strong">0.986</td>
+            </tr>
+            <tr>
+              <td><code>target_position</code></td>
+              <td class="result-strong">0.964</td>
+              <td class="result-strong">0.955</td>
+              <td class="result-strong">0.939</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:1rem;">
+      <div class="column is-12">
+        <figure>
+          <img src="static/img/task_vs_position_full_side_by_side_clean.png"
+               alt="Task vs target-position leave-one-layout-out accuracy on the full 6-layout suite"
+               style="width:100%; border-radius:8px; border:1px solid #e0e0e0;">
+        </figure>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="callout">
+          Reading the table by columns: image-token slices are slightly stronger
+          than text-token slices for both labels, but text-token slices are still
+          very strong.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Takeaway</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="hypothesis-card h-task">
+          <div class="hypothesis-label" style="color:#1a3c6b;">Main Conclusion</div>
+          <ul>
+            <li>The frozen S2→S1 boundary linearly separates <strong>target object</strong>.</li>
+            <li>The same boundary also linearly separates <strong>target position</strong>.</li>
+            <li>On the full clean 6-layout suite, <strong>task/object decoding is slightly stronger</strong> than position decoding.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">2D Geometry</h2>
+    <p class="has-text-centered section-note" style="margin-bottom:1.5rem;">
+      Two complementary 2D views of the same pooled latent representations.
+    </p>
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <div class="callout">
+          <strong>PCA</strong> is a true 2D projection of the pooled 2048D latent.
+          <strong>Classifier Coordinate Plane</strong> uses the trained classifiers
+          themselves to define the axes: x from target position and y from target object.
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:0.75rem;">
+      <div class="column is-12">
+        <p class="section-note" style="margin-bottom:0.75rem;">
+          <strong>PCA of pooled latents.</strong> This is an unsupervised 2D view:
+          each point starts as a pooled latent vector and is projected down with PCA.
+        </p>
+        <figure>
+          <img src="static/img/task_observer_pca_triptych.png"
+               alt="PCA projection of pooled task observer latents for all, image, and text token slices"
+               style="width:100%; border-radius:8px; border:1px solid #e0e0e0;">
+        </figure>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:1.5rem;">
+      <div class="column is-12">
+        <p class="section-note" style="margin-bottom:0.75rem;">
+          <strong>Classifier Coordinate Plane.</strong> Here the axes are semantic:
+          the x-axis is defined by the target-position classifier and the y-axis by
+          the target-object classifier.
+        </p>
+        <figure>
+          <img src="static/img/task_observer_classifier_coordinate_triptych.png"
+               alt="Classifier coordinate plane for pooled task observer latents across all, image, and text token slices"
+               style="width:100%; border-radius:8px; border:1px solid #e0e0e0;">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Setup</h2>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <table class="table is-fullwidth is-bordered is-striped mini-table">
+          <tbody>
+            <tr><td>Simulation</td><td>SimplerEnv custom 3-object pick layouts</td></tr>
+            <tr><td>Robot</td><td>Google Robot (<code>OXE_GOOGLE</code>)</td></tr>
+            <tr><td>Model</td><td><code>nvidia/GR00T-N1.6-fractal</code></td></tr>
+            <tr><td>Probe</td><td>linear classifier on frozen boundary latents</td></tr>
+            <tr><td>Instance</td><td><code>g5.2xlarge</code></td></tr>
+            <tr><td>GPU</td><td>NVIDIA A10G (23 GB)</td></tr>
+            <tr><td>RAM</td><td>30 GB</td></tr>
+            <tr><td>OS</td><td>Ubuntu 24.04.4 LTS</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="callout">
+          Reproduction commands are in the accompanying
+          <a href="README.md">README</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Next Steps</h2>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="next-step-card">
+          <strong>Prompt control</strong>
+          <p class="section-note">
+            Recompute the same rollout states under counterfactual prompts to
+            separate prompt-conditioned signal from scene or behavior state.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="next-step-card">
+          <strong>OOD scenes</strong>
+          <p class="section-note">
+            Move beyond the clean 6-layout suite into clutter and out-of-distribution
+            scenes while keeping the same labels and probe protocol.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="next-step-card">
+          <strong>Token importance</strong>
+          <p class="section-note">
+            Replace coarse slice ablations with leave-one-text-token-out and grouped
+            image-token masking to see which tokens matter most.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

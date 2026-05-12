@@ -1,0 +1,218 @@
+body {
+  font-family: "Google Sans", "Noto Sans", sans-serif;
+}
+
+/* ── Title ──────────────────────────────────────────────────────────────── */
+.publication-title {
+  font-family: "Castoro", serif;
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.publication-authors {
+  font-size: 1.1rem;
+  margin-top: 0.75rem;
+}
+
+.publication-venue {
+  color: #666;
+}
+
+/* ── Condition color labels ───────────────────────────────────────────────  */
+.tag-base {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.tag-finetuned {
+  color: #1a6b2b;
+  font-weight: 600;
+}
+
+.tag-task {
+  color: #1a3c6b;
+  font-weight: 600;
+}
+
+.tag-scene {
+  color: #6b1a5a;
+  font-weight: 600;
+}
+
+/* ── Results table ───────────────────────────────────────────────────────── */
+.results-table th {
+  background: #f5f5f5;
+}
+
+.result-pass {
+  color: #1a6b2b;
+  font-weight: 700;
+}
+
+.result-fail {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+.result-mid {
+  color: #d68910;
+  font-weight: 700;
+}
+
+.result-pending {
+  color: #aaa;
+}
+
+/* ── Hypothesis cards ────────────────────────────────────────────────────── */
+.hypothesis-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.hypothesis-card.h-task {
+  border-left: 4px solid #1a3c6b;
+  background: #f5f7ff;
+}
+
+.hypothesis-card.h-scene {
+  border-left: 4px solid #6b1a5a;
+  background: #fdf5fb;
+}
+
+.hypothesis-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Architecture diagram ────────────────────────────────────────────────── */
+.arch-box {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.arch-box.system2 {
+  border-color: #1a3c6b;
+  background: #eef2ff;
+}
+
+.arch-box.interface {
+  border-color: #d68910;
+  background: #fff9ec;
+  border-width: 3px;
+}
+
+.arch-box.system1 {
+  border-color: #1a6b2b;
+  background: #efffef;
+}
+
+.arch-arrow {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #888;
+  line-height: 1.2;
+  margin: 0.3rem 0;
+}
+
+.arch-hook-label {
+  font-size: 0.8rem;
+  color: #d68910;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* ── Plot placeholders ───────────────────────────────────────────────────── */
+.plot-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f3f3f3;
+  border: 1px dashed #bbb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.plot-placeholder i {
+  font-size: 2rem;
+  color: #ccc;
+}
+
+/* ── Task blocks ─────────────────────────────────────────────────────────── */
+.task-block {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.task-block:last-child {
+  border-bottom: none;
+}
+
+.task-meta {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.vid-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+/* ── Videos ──────────────────────────────────────────────────────────────── */
+video {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #000;
+}
+
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #eee;
+  border-radius: 6px;
+  border: 1px dashed #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* ── Hero teaser ─────────────────────────────────────────────────────────── */
+.hero.teaser {
+  background: #f0f4f8;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.publication-links .button {
+  margin: 0 0.3rem;
+}
+
+/* ── Info callout ────────────────────────────────────────────────────────── */
+.callout {
+  background: #fff9ec;
+  border-left: 4px solid #d68910;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}

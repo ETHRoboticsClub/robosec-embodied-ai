@@ -118,6 +118,21 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered" style="margin-bottom:2rem;">Sub-Experiments</h2>
 
+    <a href="2.2/" style="display:block; color:inherit; text-decoration:none;">
+      <div class="experiment-card">
+        <div class="experiment-number">2.2</div>
+        <div class="experiment-title">GR00T N1.6: Task vs Target Position Decoding on the Full 6-Layout Suite</div>
+        <div class="experiment-desc">
+          On a controlled 6-layout, 3-object tabletop pick suite, linear probes
+          on frozen System&nbsp;2&thinsp;&rarr;&thinsp;System&nbsp;1 boundary
+          latents decode both <code>task</code> and <code>target_position</code>
+          under leave-one-layout-out evaluation. With full permutation coverage,
+          task decoding is nearly perfect and position decoding is also strong.
+        </div>
+        <span class="tag tag-status-progress">First result</span>
+      </div>
+    </a>
+
     <a href="2.1/" style="display:block; color:inherit; text-decoration:none;">
       <div class="experiment-card">
         <div class="experiment-number">2.1</div>
@@ -130,7 +145,7 @@
           interface geometry clusters by task or by visual scene.
           Uses the <strong>Google Robot</strong> embodiment in SimplerEnv.
         </div>
-        <span class="tag tag-status-planned">Planned</span>
+        <span class="tag tag-status-progress">In progress</span>
       </div>
     </a>
 
@@ -144,7 +159,11 @@
       <div class="column is-five-sixths">
         <div class="section-label" style="margin-bottom:0.75rem;">Overall Conclusion</div>
         <div class="conclusion-box">
-          Pending completion of sub-experiments.
+          First result: on the clean full 6-layout suite, frozen
+          System&nbsp;2&thinsp;&rarr;&thinsp;System&nbsp;1 latents support
+          near-perfect linear decoding of target object and strong decoding of
+          target position. The next steps are prompt controls, token-importance
+          analysis, and clutter / OOD scene transfers.
         </div>
       </div>
     </div>
