@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DAgger Steering on GR00T N1.6</title>
+  <title>DAgger-Style Task Steering on GR00T N1.6</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -41,24 +41,29 @@
       color:#1a1a2e;
       font-family:'Castoro', serif;
     }
-    .scene-grid, .video-grid {
+    .video-grid, .metric-grid {
       display:grid;
       grid-template-columns:repeat(2, 1fr);
       gap:1rem;
     }
-    .scene-card, .video-card, .metric-card {
+    .artifact-video-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:1rem;
+    }
+    .video-card, .metric-card {
       border:1px solid #e0e0e0;
       border-radius:8px;
       background:#fff;
       padding:1rem 1.1rem;
     }
-    .scene-card img, .video-card video {
+    .video-card video {
       width:100%;
       border-radius:6px;
       border:1px solid #d7d7d7;
       background:#000;
     }
-    .scene-title, .video-title, .metric-title {
+    .video-title, .metric-title {
       font-family:'Google Sans', sans-serif;
       color:#1a1a2e;
       font-size:1rem;
@@ -68,15 +73,40 @@
     .status-good { color:#0f5132; font-weight:600; }
     .status-warn { color:#8a6d3b; font-weight:600; }
     .status-bad { color:#a12622; font-weight:600; }
-    .metric-grid {
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:1rem;
+    .table-note {
+      color:#555;
+      font-size:0.92rem;
+      margin-top:0.75rem;
+    }
+    .artifact-section {
+      border:1px solid #e0e0e0;
+      border-radius:10px;
+      background:#fff;
+      padding:0.85rem 1rem 1rem;
+      margin-bottom:1rem;
+    }
+    .artifact-section summary {
+      cursor:pointer;
+      list-style:none;
+      font-family:'Google Sans', sans-serif;
+      color:#1a1a2e;
+      font-size:1.05rem;
+      font-weight:600;
+    }
+    .artifact-section summary::-webkit-details-marker { display:none; }
+    .artifact-section[open] summary { margin-bottom:0.75rem; }
+    .artifact-meta {
+      color:#666;
+      font-size:0.9rem;
+      margin:0 0 1rem;
     }
     table td, table th { vertical-align:top; }
     footer.footer { background-color:#fff !important; }
+    @media (max-width: 1024px) {
+      .artifact-video-grid { grid-template-columns:repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-      .scene-grid, .video-grid, .metric-grid { grid-template-columns:1fr; }
+      .video-grid, .metric-grid, .artifact-video-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -93,12 +123,12 @@
             </a>
           </p>
           <h1 class="title is-1 publication-title">
-            DAgger Steering on GR00T N1.6
+            DAgger-Style Task Steering on GR00T N1.6
           </h1>
           <p class="subtitle">
-            A single fixed DAgger delta steers the frozen policy on the clean
-            mirrored left/right scenes. Transfer beyond that train family
-            remains open.
+            Run 81 replaces the old left/right-only story with a six-layout
+            steering matrix that separates scene, object, position, and
+            conjunction effects.
           </p>
         </div>
       </div>
@@ -114,30 +144,28 @@
           <div class="column">
             <div class="section-label">Question</div>
             <p style="color:#444;">
-              Can a <em>single fixed representation-space delta</em> make a frozen
-              policy behave as if the prompt were
-              <em>"pick up the bottle"</em> even when the runtime prompt remains
-              <em>"pick up the orange"</em>?
+              If we learn a fixed boundary delta under the runtime prompt
+              <em>"pick up the orange"</em>, does the steered policy follow the
+              target <strong>object</strong>, the target <strong>position</strong>,
+              the exact <strong>training scene</strong>, or some entangled mixture?
             </p>
           </div>
           <div class="column">
-            <div class="section-label">Why This Matters</div>
+            <div class="section-label">Why This Test</div>
             <p style="color:#444;">
-              Can we steer the policy by intervening only at the boundary
-              between the backbone and the action head?
+              The point is not to celebrate one lucky bottle pickup. The point is
+              to identify what variable the boundary intervention actually controls
+              before we invest more time in patching or larger steering runs.
             </p>
           </div>
           <div class="column">
-            <div class="section-label">Current Answer</div>
+            <div class="section-label">Current Read</div>
             <p style="color:#444;">
-              The main positive result is that a <strong>single fixed delta</strong>
-              can steer the frozen policy toward the bottle on both clean
-              mirrored left/right scenes while the runtime prompt still says
-              <em>"pick up the orange"</em>. That delta was trained only on
-              left/right data. The next question is transfer: on the new
-              symmetric up/down holdout axis, the first preview still scores
-              <span class="status-bad">0 / 2</span> on both front and back by
-              simulator reward.
+              The six-layout matrix is more informative than the earlier pilot.
+              The current read is that <strong>position steering transfers</strong>
+              much more cleanly than <strong>object steering</strong>, while the
+              object-trained delta mostly looks good on the layouts it saw during
+              training.
             </p>
           </div>
         </div>
@@ -148,189 +176,125 @@
 
 <section class="section" style="background:#fafafa;">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Exact DAgger Protocol</h2>
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="info-box">
+          This page restarts the steering write-up around the current experiment.
+          We keep the DAgger-style training explanation because it still matches
+          the mechanism used here, but we drop the old round-by-round narrative
+          as the main lens. The new core result is a six-layout task-steering
+          matrix on the clean bottle/coke/orange suite. It compares a
+          scene-specific control, an object control, a position control, an
+          object-position conjunction control, and prompt baselines. The main
+          takeaway is not “object steering solved.” The main takeaway is that
+          the present setup exposes a strong and transferable <strong>slot /
+          position bias</strong>, while clean held-out <strong>object
+          transfer</strong> is still not established.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Steering Protocol</h2>
     <div class="info-box" style="margin-bottom:1.25rem;">
-      This page is about <strong>DAgger steering</strong>, not patching and not
-      prompt editing. The model stays frozen. The only learned object is a fixed
-      image-token delta added at the representation boundary before the action head.
+      The model stays frozen. We only learn a fixed delta at the
+      System 2&rarr;System 1 boundary. The steering data comes from student-visited
+      states that are relabeled offline with a teacher target. That is the part
+      of the DAgger story that still matters for this page.
     </div>
     <div class="method-box has-text-centered">
-      student rollout: <code>policy(image, state, "pick up the orange")</code>
+      student rollout:
+      <code>policy(image, state, "pick up the orange")</code>
       &nbsp;&rarr;&nbsp;
-      teacher relabel: <code>policy(image, state, "pick up the bottle")</code>
+      teacher relabel on the same visited states
       &nbsp;&rarr;&nbsp;
-      train one fixed delta
+      train one fixed boundary delta
       &nbsp;&rarr;&nbsp;
-      eval: <code>policy(image, state, "pick up the orange") + delta</code>
+      eval:
+      <code>policy(image, state, "pick up the orange") + delta</code>
     </div>
     <div class="content" style="margin-top:1.25rem;">
       <ol>
-        <li>Collect student states on two clean mirrored train scenes: bottle-left and bottle-right.</li>
-        <li>Relabel those exact visited states offline with the bottle teacher prompt.</li>
-        <li>Train one full image-token delta on the relabeled action targets.</li>
-        <li>Evaluate the same fixed vector on seen scenes and then on an orthogonal up/down holdout axis.</li>
+        <li>Start from the clean six-layout task-observer collection.</li>
+        <li>Select training layouts according to the steering hypothesis being tested.</li>
+        <li>Relabel the chosen orange-prompt states with deterministic teacher targets.</li>
+        <li>Train one image-token full delta per artifact.</li>
+        <li>Evaluate each learned delta on all 6 layouts under the unchanged runtime prompt
+          <em>"pick up the orange"</em>.</li>
       </ol>
       <p>
-        The current published checkpoint is the round-2 delta trained from
-        <strong>3098</strong> teacher-labeled frames after an on-policy recollection pass.
+        This is why the experiment is interpretable: the prompt at deployment
+        stays fixed, the model weights stay fixed, and only the boundary delta
+        changes from one artifact to another.
       </p>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="background:#fafafa;">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">What Round 2 Means Here</h2>
-    <div class="metric-grid" style="margin-bottom:1.5rem;">
-      <div class="metric-card">
-        <div class="metric-title">Round 1</div>
-        <p>Start from <strong>zero delta</strong>.</p>
-        <p>Collect student rollouts on <strong>left/right only</strong> with prompt
-        <em>"pick up the orange"</em>, no steering.</p>
-        <p>Offline teacher relabeling uses <em>"pick up the bottle"</em>.</p>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Round 2</div>
-        <p>Start from the <strong>round-1 delta</strong>.</p>
-        <p>Recollect fresh student rollouts on the same <strong>left/right train family</strong>,
-        now with the current steered policy active.</p>
-        <p>Teacher relabel again, then retrain a new delta from that updated on-policy state distribution.</p>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">What It Is Not</div>
-        <p>Round 2 is <strong>not</strong> training on front/back.</p>
-        <p>It is also <strong>not</strong> reusing a frozen logged dataset from a different branch.</p>
-        <p>The only train scenes remain bottle-left and bottle-right.</p>
-      </div>
-    </div>
-
-    <h2 class="title is-3 has-text-centered">What The Published Delta Actually Saw</h2>
-    <div class="metric-grid">
-      <div class="metric-card">
-        <div class="metric-title">Train Scenes Only</div>
-        <p>The vector was trained only on the two mirrored seen scenes:</p>
-        <p><strong>bottle-left</strong> and <strong>bottle-right</strong>.</p>
-        <p class="small-note">No up/down front/back holdout frames were used during DAgger collection or training.</p>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Different Rollout Randomness</div>
-        <p>The checkpoint was not fit to one deterministic clip.</p>
-        <p>Round 2 recollected <strong>6 student episodes per side</strong>, then bottle-teacher relabeled the visited states offline.</p>
-        <p class="small-note">Seen-scene evaluation videos are fresh episodes, not recycled training videos.</p>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Strict Holdout</div>
-        <p>The validated up/down axis appears only at test time.</p>
-        <p><strong>Train:</strong> left/right only.</p>
-        <p><strong>Test:</strong> front/back only.</p>
-        <p class="small-note">That is why the holdout failure matters: it is a true geometry transfer test.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Scene Family Used In This Page</h2>
+    <h2 class="title is-3 has-text-centered">Six-Layout Test Matrix</h2>
     <p class="has-text-centered small-note" style="margin-bottom:1.5rem;">
-      Only the validated holdout geometry is shown here. Earlier front/back layouts were rejected and should not be quoted.
+      Layout codes are left-to-right object order. Each artifact is evaluated on
+      all 6 layouts, 3 episodes per layout.
     </p>
-    <div class="scene-grid">
-      <div class="scene-card">
-        <div class="scene-title">Seen Train Scene — Bottle Left</div>
-        <img src="static/images/scene_left.png" alt="Left train scene">
-        <p class="small-note" style="margin-top:0.6rem;">
-          Bottle on the left, orange on the right. This is one of the two mirrored train scenes.
-        </p>
-      </div>
-      <div class="scene-card">
-        <div class="scene-title">Seen Train Scene — Bottle Right</div>
-        <img src="static/images/scene_right.png" alt="Right train scene">
-        <p class="small-note" style="margin-top:0.6rem;">
-          Bottle on the right, orange on the left. Same clean two-object setup.
-        </p>
-      </div>
-      <div class="scene-card">
-        <div class="scene-title">Holdout v4 — Bottle Front</div>
-        <img src="static/images/scene_front.png" alt="Front holdout scene">
-        <p class="small-note" style="margin-top:0.6rem;">
-          Validated up/down holdout: bottle upper-center, orange lower-center.
-        </p>
-      </div>
-      <div class="scene-card">
-        <div class="scene-title">Holdout v4 — Bottle Back</div>
-        <img src="static/images/scene_back.png" alt="Back holdout scene">
-        <p class="small-note" style="margin-top:0.6rem;">
-          Mirror of the previous scene: bottle lower-center, orange upper-center.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="background:#fafafa;">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">The Learned Vector Itself</h2>
-    <div class="columns is-centered">
-      <div class="column is-five-sixths">
-        <div class="scene-card">
-          <img src="static/images/delta_visualization.png" alt="Visualization of the learned DAgger delta">
-          <p class="small-note" style="margin-top:0.8rem;">
-            Learned steering tensor for the published checkpoint. This run uses
-            a <code>108 × 2048</code> boundary delta and steers the image-token
-            rows only, so the final text-token rows stay at zero by design.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="background:#fafafa;">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Current Intermediate Results</h2>
-    <p class="has-text-centered small-note" style="margin-bottom:1rem;">
-      Published checkpoint = round-2 delta, trained only on the left/right train
-      family and evaluated on fresh rollouts.
-    </p>
-    <table class="table is-fullwidth is-bordered is-striped" style="margin-bottom:1.75rem;">
+    <table class="table is-fullwidth is-bordered is-striped">
       <thead>
         <tr>
-          <th>Setting</th>
-          <th>Episodes</th>
-          <th>Simulator Success</th>
-          <th>Manual Bottle Intent</th>
-          <th>Readout</th>
+          <th>Layout</th>
+          <th>Left</th>
+          <th>Middle</th>
+          <th>Right</th>
+          <th>Bottle Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>OCB</code></td><td>orange</td><td>coke</td><td>bottle</td><td>right</td></tr>
+        <tr><td><code>BCO</code></td><td>bottle</td><td>coke</td><td>orange</td><td>left</td></tr>
+        <tr><td><code>BOC</code></td><td>bottle</td><td>orange</td><td>coke</td><td>left</td></tr>
+        <tr><td><code>COB</code></td><td>coke</td><td>orange</td><td>bottle</td><td>right</td></tr>
+        <tr><td><code>OBC</code></td><td>orange</td><td>bottle</td><td>coke</td><td>middle</td></tr>
+        <tr><td><code>CBO</code></td><td>coke</td><td>bottle</td><td>orange</td><td>middle</td></tr>
+      </tbody>
+    </table>
+
+    <table class="table is-fullwidth is-bordered is-striped" style="margin-top:1.5rem;">
+      <thead>
+        <tr>
+          <th>Artifact</th>
+          <th>Train Layouts</th>
+          <th>What It Tests</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Seen scene — bottle left</strong></td>
-          <td>10</td>
-          <td><span class="status-bad">0 / 10</span></td>
-          <td><span class="status-good">10 / 10</span></td>
-          <td>The vector redirects target selection correctly, but the grasp does not complete reliably enough for the env reward.</td>
+          <td><code>scene_specific_ocb_bottle</code></td>
+          <td><code>OCB</code></td>
+          <td>Exact-scene null: does the effect stay tied to the literal source layout?</td>
         </tr>
         <tr>
-          <td><strong>Seen scene — bottle right</strong></td>
-          <td>10</td>
-          <td><span class="status-good">10 / 10</span></td>
-          <td><span class="status-good">10 / 10</span></td>
-          <td>Intent and simulator success align.</td>
+          <td><code>object_bottle</code></td>
+          <td><code>OCB, BOC, OBC</code></td>
+          <td>Object test: bottle appears once in each slot across the train set.</td>
         </tr>
         <tr>
-          <td><strong>Holdout v4 — front</strong></td>
-          <td>2</td>
-          <td><span class="status-bad">0 / 2</span></td>
-          <td><span class="status-bad">0 / 2</span></td>
-          <td>No transfer by current intent grading or simulator reward on the validated up/down holdout.</td>
+          <td><code>position_right</code></td>
+          <td><code>OCB, BCO, BOC</code></td>
+          <td>Position test: three different objects occupy the right slot across train layouts, and in every train layout the teacher target is the rightmost object while the runtime prompt stays <code>pick up the orange</code>.</td>
         </tr>
         <tr>
-          <td><strong>Holdout v4 — back</strong></td>
-          <td>2</td>
-          <td><span class="status-bad">0 / 2</span></td>
-          <td><span class="status-bad">0 / 2</span></td>
-          <td>No transfer by current intent grading or simulator reward on the validated up/down holdout.</td>
+          <td><code>object_position_bottle_right</code></td>
+          <td><code>OCB, COB</code></td>
+          <td>Conjunction test: bottle and right are fixed together.</td>
+        </tr>
+        <tr>
+          <td><code>prompt_orange_target_bottle</code></td>
+          <td><code>n/a</code></td>
+          <td>Cross-prompt reference without a learned steering delta.</td>
         </tr>
       </tbody>
     </table>
@@ -339,32 +303,135 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Representative Videos</h2>
+    <h2 class="title is-3 has-text-centered">Hypothesis Lens</h2>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-title">H0. Scene-Specific Steering</div>
+        <p>Good behavior stays confined to the exact source layout or to a very narrow family.</p>
+        <p class="small-note">Signature: strong on train layouts, weak elsewhere.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">H1. Object-Level Steering</div>
+        <p>The delta follows the bottle as bottle moves between left, middle, and right.</p>
+        <p class="small-note">Signature: bottle-directed intent survives on held-out layouts.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">H2. Position-Level Steering</div>
+        <p>The delta follows the slot regardless of which object occupies that slot.</p>
+        <p class="small-note">Signature: wrong-object failures concentrated on the old slot.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">H3. Mixed / Conjunction Code</div>
+        <p>The learned effect may entangle object and position, or collapse to one factor more than the other.</p>
+        <p class="small-note">Signature: conjunction controls look strong only when bottle and slot line up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Run 81 Results</h2>
+    <p class="has-text-centered small-note" style="margin-bottom:1rem;">
+      This table is intent-first. The primary numbers come from manual video
+      review across the six-layout matrix, not from simulator reward. For
+      <code>scene_specific_ocb_bottle</code> and <code>object_bottle</code>,
+      intent means bottle / object-following behavior. For
+      <code>position_right</code> and <code>object_position_bottle_right</code>,
+      intent means consistent attraction to the right slot. That difference is
+      the point of the experiment.
+    </p>
+    <table class="table is-fullwidth is-bordered is-striped">
+      <thead>
+        <tr>
+          <th>Artifact</th>
+          <th>Train Layouts</th>
+          <th>Manual Intent</th>
+          <th>Current Read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>scene_specific_ocb_bottle</code></td>
+          <td><code>OCB</code></td>
+          <td><span class="status-warn">6 / 18 reviewed bottle intent</span></td>
+          <td>Interesting negative result: the patch still has an effect off the literal OCB scene, but that effect is not object steering. It consistently pulls to the right and only looks bottle-directed when the bottle happens to be on the right.</td>
+        </tr>
+        <tr>
+          <td><code>object_bottle</code></td>
+          <td><code>OCB, BOC, OBC</code></td>
+          <td><span class="status-warn">8.5 / 18 reviewed bottle intent</span></td>
+          <td>This does not read as clean object steering. Most of the bottle-directed behavior is concentrated on the train layouts, which makes it look more like a training-layout / scene effect than true bottle transfer; off-train, it usually falls back to the runtime orange prompt.</td>
+        </tr>
+        <tr>
+          <td><code>position_right</code></td>
+          <td><code>OCB, BCO, BOC</code></td>
+          <td><span class="status-good">18 / 18 reviewed right-slot intent</span></td>
+          <td>The clearest positive result. The delta reliably follows the rightmost object across layouts even though the runtime prompt still says <em>pick up the orange</em>.</td>
+        </tr>
+        <tr>
+          <td><code>object_position_bottle_right</code></td>
+          <td><code>OCB, COB</code></td>
+          <td><span class="status-good">18 / 18 reviewed right-slot intent</span></td>
+          <td>The conjunction does not rescue object identity. It behaves like a stronger <em>go right</em> controller, even when the bottle is no longer on the right.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Current Conclusion</h2>
+    <div class="info-box">
+      The present steering setup is already scientifically useful, but its main
+      result is not the one we originally hoped for. The clean claim from Run 81
+      is that <strong>boundary deltas steer position more robustly than object
+      identity</strong> on this suite. Object steering has not yet transferred
+      cleanly across held-out layouts.
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Run 81 Patch Videos</h2>
     <p class="has-text-centered small-note" style="margin-bottom:1.5rem;">
-      These are illustrative, not exhaustive. The left example is a simulator-marked failure from the seen-scene eval,
-      but it was part of the manually reviewed set judged bottle-directed.
+      Every Run 81 evaluation video for each learned patch is included below.
+      Each patch section contains all 18 clips: 6 layouts times 3 videos.
+    </p>
+    <div id="run81-artifact-videos"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Earlier Pilot Videos</h2>
+    <p class="has-text-centered small-note" style="margin-bottom:1.5rem;">
+      These earlier left/right and front/back clips are kept for historical
+      context, but they are no longer the main narrative of the page.
     </p>
     <div class="video-grid">
       <div class="video-card">
-        <div class="video-title">Seen Scene — Left (sim fail, manual bottle intent)</div>
+        <div class="video-title">Legacy Pilot — Seen Left</div>
         <video controls playsinline muted preload="metadata">
           <source src="static/videos/seen_left_manual_intent_selected.mp4" type="video/mp4">
         </video>
       </div>
       <div class="video-card">
-        <div class="video-title">Seen Scene — Right (sim success)</div>
+        <div class="video-title">Legacy Pilot — Seen Right</div>
         <video controls playsinline muted preload="metadata">
           <source src="static/videos/seen_right_success.mp4" type="video/mp4">
         </video>
       </div>
       <div class="video-card">
-        <div class="video-title">Holdout v4 — Front (sim fail, no bottle intent)</div>
+        <div class="video-title">Legacy Pilot — Holdout Front</div>
         <video controls playsinline muted preload="metadata">
           <source src="static/videos/holdout_front_v4.mp4" type="video/mp4">
         </video>
       </div>
       <div class="video-card">
-        <div class="video-title">Holdout v4 — Back (sim fail, no bottle intent)</div>
+        <div class="video-title">Legacy Pilot — Holdout Back</div>
         <video controls playsinline muted preload="metadata">
           <source src="static/videos/holdout_back_v4.mp4" type="video/mp4">
         </video>
@@ -375,17 +442,110 @@
 
 <section class="section" style="background:#fafafa;">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Interim Takeaway</h2>
+    <h2 class="title is-3 has-text-centered">Next</h2>
     <div class="info-box">
-      The intermediate story is:
-      <strong>there exists a fixed DAgger steering vector that redirects the
-      frozen policy on the clean mirrored left/right train family.</strong>
-      What remains open is whether that same vector transfers beyond the train
-      axis. That is why this page keeps the seen-scene result and the negative
-      holdout result side by side.
+      Run 81 already answered the main question from this setup. We should not
+      keep extending it just to get more of the same result.
+    </div>
+    <div class="content" style="margin-top:1rem;">
+      <p>
+        The important result is that the current steering method gives a strong
+        position effect, but not clean object transfer. So the next branch
+        should be a different object test, not another pass on the same matrix.
+      </p>
+      <p>
+        The useful parts to keep are simple: frozen policy, teacher relabeling,
+        and manual intent review. What needs to change is the training setup if
+        the goal is to isolate object steering.
+      </p>
+      <p>
+        So the next step is not patching yet. First we need a cleaner experiment
+        where object and position are separated more deliberately.
+      </p>
     </div>
   </div>
 </section>
+
+<script>
+  const run81Layouts = ['OCB', 'BCO', 'BOC', 'COB', 'OBC', 'CBO'];
+  const run81Artifacts = [
+    {
+      key: 'scene_specific_ocb_bottle',
+      train: 'OCB',
+      review: '6 / 18 reviewed bottle intent',
+    },
+    {
+      key: 'object_bottle',
+      train: 'OCB, BOC, OBC',
+      review: '8.5 / 18 reviewed bottle intent',
+    },
+    {
+      key: 'position_right',
+      train: 'OCB, BCO, BOC',
+      review: '18 / 18 reviewed right-slot intent',
+    },
+    {
+      key: 'object_position_bottle_right',
+      train: 'OCB, COB',
+      review: '18 / 18 reviewed right-slot intent',
+    },
+  ];
+
+  function buildRun81ArtifactVideos() {
+    const root = document.getElementById('run81-artifact-videos');
+    if (!root) return;
+
+    run81Artifacts.forEach((artifact) => {
+      const details = document.createElement('details');
+      details.className = 'artifact-section';
+      details.open = true;
+
+      const summary = document.createElement('summary');
+      summary.innerHTML = `<code>${artifact.key}</code>`;
+      details.appendChild(summary);
+
+      const meta = document.createElement('p');
+      meta.className = 'artifact-meta';
+      meta.innerHTML = `Train layouts: <code>${artifact.train}</code> · Review: ${artifact.review}`;
+      details.appendChild(meta);
+
+      const grid = document.createElement('div');
+      grid.className = 'artifact-video-grid';
+
+      run81Layouts.forEach((layout) => {
+        for (let index = 1; index <= 3; index += 1) {
+          const videoNumber = String(index).padStart(2, '0');
+          const card = document.createElement('div');
+          card.className = 'video-card';
+
+          const title = document.createElement('div');
+          title.className = 'video-title';
+          title.innerHTML = `<code>${layout}</code> · v${videoNumber}`;
+
+          const video = document.createElement('video');
+          video.setAttribute('controls', '');
+          video.setAttribute('playsinline', '');
+          video.setAttribute('muted', '');
+          video.setAttribute('preload', 'metadata');
+
+          const source = document.createElement('source');
+          source.src = `static/videos/run81/${artifact.key}/${layout}/B_${layout}_v${videoNumber}.mp4`;
+          source.type = 'video/mp4';
+
+          video.appendChild(source);
+          card.appendChild(title);
+          card.appendChild(video);
+          grid.appendChild(card);
+        }
+      });
+
+      details.appendChild(grid);
+      root.appendChild(details);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', buildRun81ArtifactVideos);
+</script>
 
 <footer class="footer">
   <div class="container">

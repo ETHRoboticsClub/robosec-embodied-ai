@@ -1,10 +1,14 @@
 # Experiment 4.1
 
-Detailed intermediate page for DAgger steering on GR00T N1.6.
+DAgger-style task steering on GR00T N1.6.
+
+This page now centers the current six-layout steering matrix instead of the old
+left/right round story.
 
 Highlights:
 
-- exact student/teacher DAgger protocol
-- validated left/right seen-scene setup
-- validated up/down holdout geometry
-- current positive and negative results together
+- frozen-policy boundary steering under the unchanged runtime prompt
+- compact DAgger-style teacher-relabeling explanation
+- six-layout object-vs-position test matrix
+- manual intent review plus simulator success interpretation
+- earlier pilot videos kept as legacy context, with new Run 81 videos added

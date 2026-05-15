@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Experiment 4 — DAgger Steering</title>
+  <title>Experiment 4 — Boundary Task Steering</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -73,7 +73,7 @@
         </a>
       </p>
       <h1 class="title is-1 publication-title">Experiment 4</h1>
-      <p class="subtitle">DAgger Steering at the Representation Boundary</p>
+      <p class="subtitle">Boundary Task Steering on Frozen GR00T Policies</p>
     </div>
   </div>
 </section>
@@ -86,17 +86,18 @@
           <div class="column">
             <div class="section-label">Goal</div>
             <p style="color:#444;">
-              Test whether a fixed representation-space steering vector trained by
-              DAgger can redirect a frozen robot policy from one prompt semantics
-              to another without modifying the model weights.
+              Test whether a fixed boundary delta learned from teacher relabeling
+              can redirect a frozen GR00T policy, and determine whether the
+              learned effect tracks object identity, target position, or a more
+              scene-specific shortcut.
             </p>
           </div>
           <div class="column">
             <div class="section-label">Current Read</div>
             <p style="color:#444;">
-              Seen-scene behavior looks materially better than raw simulator
-              reward suggests, but transfer off the left/right train axis is not
-              yet established.
+              The current six-layout matrix is more informative than the earlier
+              pilot: position steering transfers clearly, while object steering
+              still looks tied to the layouts used in training.
             </p>
           </div>
         </div>
@@ -112,18 +113,16 @@
     <a href="4.1/" style="display:block; color:inherit; text-decoration:none;">
       <div class="experiment-card">
         <div class="experiment-number">4.1</div>
-      <div class="experiment-title">DAgger Steering on GR00T N1.6 : Seen-Scene Fit vs Up/Down Holdout</div>
+      <div class="experiment-title">DAgger-Style Task Steering on GR00T N1.6 : Six-Layout Object-vs-Position Matrix</div>
       <div class="experiment-desc">
-        A frozen <code>nvidia/GR00T-N1.6-fractal</code> is steered by a learned
-        image-token delta trained from DAgger relabeling:
-        <em>student prompt = pick up the orange</em>,
-        <em>teacher prompt = pick up the bottle</em>.
-        The published delta is trained only on left/right scenes across multiple
-        student rollouts. Current intermediate result: strong qualitative
-        left/right steering on seen scenes, but no simulator success yet on the
-        new up/down holdout axis in the first preview.
+        A frozen <code>nvidia/GR00T-N1.6-fractal</code> is steered under the
+        unchanged runtime prompt <em>pick up the orange</em> using fixed boundary
+        deltas trained from teacher-relabeled states. Run 81 evaluates
+        scene-specific, object, position, and conjunction controls across the
+        full six-layout suite. Current result: position steering transfers
+        clearly; object steering does not yet transfer cleanly.
       </div>
-      <span class="tag tag-status-progress">Intermediate result</span>
+      <span class="tag tag-status-progress">Current result</span>
     </div>
     </a>
   </div>
@@ -135,9 +134,10 @@
       <div class="column is-five-sixths">
         <div class="section-label" style="margin-bottom:0.75rem;">Status</div>
         <div class="conclusion-box">
-          This experiment page is intentionally intermediate. It is meant to show
-          the DAgger steering protocol, the clean left/right success story, and
-          the first failed holdout transfer results before a final polished write-up.
+          Current read: the six-layout matrix is now the main result. It shows
+          that the present steering recipe is better at controlling slot /
+          position than target object identity. The next branch should be a
+          cleaner factorization study, not more of the same setup.
         </div>
       </div>
     </div>
