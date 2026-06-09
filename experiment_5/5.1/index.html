@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting GR00T-N1.6 with a Visual Patch — What Works, What Doesn't, and Why</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <style>
+    .method-box {
+      background:#f5f8ff; border:1px solid #d0ddf5; border-radius:8px;
+      padding:1.25rem 1.5rem; margin-top:1rem; font-family: 'Castoro', serif;
+      color:#1a1a2e;
+    }
+    .method-box code { background:rgba(0,0,0,0.04); padding:0.05em 0.4em; border-radius:3px;
+      font-family: ui-monospace, SFMono-Regular, monospace; }
+    .method-arrow { color:#3273dc; font-weight:700; padding:0 0.4em; }
+    .caveat-banner {
+      background:#fff8e1; border-left:4px solid #f0a500; border-radius:0 6px 6px 0;
+      padding:0.9rem 1.3rem; font-size:0.92rem; color:#5a4a1a; margin:1rem 0 1.5rem 0;
+    }
+    .honest-note {
+      background:#eef6f0; border-left:4px solid #1a6b2b; border-radius:0 6px 6px 0;
+      padding:0.9rem 1.3rem; font-size:0.92rem; color:#234a2e; margin:1rem 0;
+    }
+    .quirk-block {
+      margin-bottom:2.5rem; padding-bottom:2rem; border-bottom:1px solid #e8e8e8;
+    }
+    .quirk-block:last-child { border-bottom:none; }
+    .quirk-tag {
+      display:inline-block; font-family:'Google Sans',sans-serif; font-size:0.78rem;
+      text-transform:uppercase; letter-spacing:0.08em; color:#fff; background:#3273dc;
+      border-radius:4px; padding:0.15rem 0.6rem; margin-bottom:0.5rem;
+    }
+    .quirk-tag.embed { background:#e07b39; }
+    .quirk-tag.negative { background:#c0392b; }
+    .result-chip {
+      display:inline-block; font-family:'Google Sans',sans-serif; font-weight:700;
+      font-size:1.05rem; color:#1a6b2b; background:#d1e7dd; border-radius:6px;
+      padding:0.2rem 0.7rem; margin-left:0.4rem;
+    }
+    .result-chip.zero { color:#842029; background:#f8d7da; }
+    .vid-frame { max-width:360px; margin:1rem auto 0 auto; }
+    .vid-caption { color:#666; font-size:0.85rem; margin-top:0.5rem; text-align:center; }
+    .fig-frame { max-width:760px; margin:0 auto; }
+    .fig-frame img { width:100%; border:1px solid #e6e6e6; border-radius:8px; background:#fff; }
+    .fig-caption { color:#666; font-size:0.85rem; margin-top:0.6rem; text-align:center; }
+    .conclusion-box {
+      background:#f8f8f8; border-left:4px solid #1a1a2e; border-radius:0 8px 8px 0;
+      padding:1.5rem 2rem; color:#333; font-size:1rem; line-height:1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <p style="margin-bottom:1rem;">
+            <a href="../" style="color:#888; font-size:0.9rem; text-decoration:none;">
+              <i class="fas fa-arrow-left" style="margin-right:6px;"></i>Experiment 5
+            </a>
+          </p>
+
+          <h1 class="title is-1 publication-title">
+            Redirecting GR00T-N1.6<br>with a Visual Patch
+          </h1>
+
+          <p class="is-size-5" style="color:#555; margin-top:0.75rem;">
+            What works, what doesn&rsquo;t, and why.<br>
+            We try to make GR00T grab the <strong>bottle</strong> while it is told
+            <em>&ldquo;pick up the orange&rdquo;</em>.
+          </p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/baroian">Andrei Baroian</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Target Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/simpler-env/SimplerEnv"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-cube"></i></span>
+                  <span>Simulator</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai/tree/main/experiment_5/5.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HEADLINE CHART ─────────────────────────────────────────────────────── -->
+<section class="section" style="padding-bottom:1.5rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">The headline</h2>
+    <p class="has-text-centered" style="color:#444; max-width:720px; margin:0 auto 1.5rem auto;">
+      The prompt is always <em>&ldquo;pick up the orange&rdquo;</em>. Attack success means the arm
+      grabs the <strong>bottle</strong> instead. Every bar is <strong>N=20</strong> closed-loop
+      sim episodes. Three model quirks (blue) push the redirect well above the 5% clean floor;
+      a pure-embedding, DiT-free attack (orange) reaches 60% &mdash; but only at the bottle&rsquo;s edge.
+    </p>
+    <div class="fig-frame">
+      <img src="static/images/results_bar.png"
+           alt="Horizontal bar chart of bottle-grab rate by intervention, N=20 each.">
+      <p class="fig-caption">
+        Bottle-grab rate by intervention (N=20 each, prompt = &ldquo;pick up the orange&rdquo;).
+        Gray = baselines (5% clean floor, 0% random patch, 100% ceiling when you simply ask for the
+        bottle); blue = the three model quirks; orange = the embedding-attack research.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SETUP ─────────────────────────────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Setup</h2>
+
+    <div class="content has-text-justified">
+      <p>
+        <strong>Model.</strong> <code>nvidia/GR00T-N1.6</code> on the
+        fractal / <code>OXE_GOOGLE</code> embodiment. <strong>Simulator.</strong>
+        <a href="https://github.com/simpler-env/SimplerEnv">SimplerEnv</a>, the Google
+        multi-object pick scene: <em>orange far-left, coke can center, white bottle right</em>.
+        The prompt is held fixed at <em>&ldquo;pick up the orange&rdquo;</em> throughout; the
+        attack is judged a success when the arm grabs the <strong>bottle</strong> instead.
+        Every evaluation is N=20 episodes, success = an env-confirmed grab.
+      </p>
+    </div>
+
+    <div class="method-box has-text-centered">
+      image patch
+      <span class="method-arrow">&rarr;</span> Eagle VLM backbone
+      <span class="method-arrow">&rarr;</span> vision-language LayerNorm (<code>vlln</code>)
+      <span class="method-arrow">&rarr;</span> post_vlln token embeddings <code>[1, 126, 2048]</code>
+      <span class="method-arrow">&rarr;</span> flow-matching DiT
+      <span class="method-arrow">&rarr;</span> action decoder
+      <span class="method-arrow">&rarr;</span> 7-DoF arm
+      <p style="margin-top:0.6rem; font-size:0.9rem; font-family:'Noto Sans',sans-serif;">
+        The DiT sees <strong>only</strong> the post_vlln embeddings.
+      </p>
+    </div>
+
+    <h3 class="title is-5" style="margin-top:1.75rem;">Verified baselines (N=20)</h3>
+    <div class="columns is-centered">
+      <div class="column is-11">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead><tr><th>Condition</th><th class="has-text-centered">Bottle-grab</th><th>What it means</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Clean, no patch, prompt &ldquo;pick up the orange&rdquo;</td>
+              <td class="has-text-centered">1/20 = 5%</td>
+              <td>The 5% floor. The arm correctly grabs the orange 14/20 = 70%.</td>
+            </tr>
+            <tr>
+              <td>Ceiling, no patch, prompt &ldquo;pick up the bottle&rdquo;</td>
+              <td class="has-text-centered result-pass">20/20 = 100%</td>
+              <td>The bottle is fully grabbable when you simply ask for it.</td>
+            </tr>
+            <tr>
+              <td>Unoptimized random patch (same placement as a working patch)</td>
+              <td class="has-text-centered result-fail">0/20 = 0%</td>
+              <td>Placement and texture alone do nothing.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top:0.5rem;">
+      <div class="column is-half has-text-centered">
+        <p class="vid-label">Baseline &mdash; ceiling (ask for the bottle)</p>
+        <video autoplay muted loop playsinline><source src="static/videos/baseline_ceiling.mp4" type="video/mp4"></video>
+        <p class="vid-caption">Prompt: &ldquo;pick up the bottle&rdquo;. Clean image, no patch. 100% across 20 episodes.</p>
+      </div>
+      <div class="column is-half has-text-centered">
+        <p class="vid-label">Baseline &mdash; clean, orange prompt</p>
+        <video autoplay muted loop playsinline><source src="static/videos/baseline_clean_orange.mp4" type="video/mp4"></video>
+        <p class="vid-caption">Prompt: &ldquo;pick up the orange&rdquo;. No patch. The arm grabs the orange (5% bottle floor).</p>
+      </div>
+    </div>
+
+    <h3 class="title is-5" style="margin-top:1.75rem;">Where the patches sit</h3>
+    <div class="fig-frame">
+      <img src="static/images/scene_placements.png"
+           alt="The 3-object scene with a patch in the top-left corner (left) and at the bottle's top edge (right).">
+      <p class="fig-caption">
+        The 3-object scene. <strong>Left:</strong> patch jammed into the empty top-left corner (0,0),
+        far from every object. <strong>Center:</strong> the clean scene. <strong>Right:</strong> the
+        same patch sitting at the bottle&rsquo;s top edge. These are the two placements compared in
+        the position test below.
+      </p>
+    </div>
+
+    <div class="honest-note">
+      <strong>Honesty note.</strong> Success rate is an env-confirmed grab count, not a behavioral
+      guarantee; we link the actual rollout videos so the reader can judge. We also distinguish an
+      <strong>UPPER-BOUND probe</strong> (uses the DiT&rsquo;s action gradient to FIND a target)
+      from the <strong>HONEST attack</strong> (a random-init patch that never differentiates the DiT).
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART A — MODEL QUIRKS ──────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Part A &mdash; Three model quirks</h2>
+    <p class="has-text-centered" style="color:#444; max-width:720px; margin:0 auto 2rem auto;">
+      These are quirks of the <em>model</em>, not of any optimizer. Each one is a robust,
+      reproducible way to make GR00T grab the bottle while being told to grab the orange.
+    </p>
+
+    <!-- Quirk 1 -->
+    <div class="quirk-block">
+      <span class="quirk-tag">Quirk 1</span>
+      <h3 class="title is-4">A square patch at the bottle&rsquo;s TOP EDGE redirects the grab
+        <span class="result-chip">65%</span></h3>
+      <div class="content has-text-justified">
+        <p>
+          A non-occluding 80&times;80 patch sitting 3px <em>above</em> the bottle
+          (<code>top=12, left=185</code>), touching neither object, redirects the grab to the bottle
+          <strong>13/20 = 65%</strong> &mdash; reproduced at a second seed (also 13/20 = 65%). A
+          DiT-gradient probe at the same edge hits 14/20 = 70% (single seed; seed-variable). The
+          honest random-init pure-embedding patch reaches 40&ndash;60% here.
+        </p>
+        <p>
+          The effect is <strong>edge-tuned</strong>: a 9px gap above the bottle, or painting directly
+          <em>on</em> the bottle, both collapse to ~0&ndash;5%. The effect peaks right at the
+          bottle&rsquo;s top edge. The orange stays fully visible the whole time (not occluded).
+        </p>
+      </div>
+      <div class="vid-frame">
+        <video autoplay muted loop playsinline><source src="static/videos/quirk1_edge_square.mp4" type="video/mp4"></video>
+        <p class="vid-caption">
+          Non-occluding 80&times;80 patch 3px above the bottle (orange fully visible). Prompt:
+          &ldquo;pick up the orange&rdquo;. The arm ignores the orange and grabs the bottle.
+          65% across 20 episodes, reproduced at 2 seeds.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quirk 2 -->
+    <div class="quirk-block">
+      <span class="quirk-tag">Quirk 2</span>
+      <h3 class="title is-4">A full-width FOREGROUND strip redirects the grab
+        <span class="result-chip">55%</span></h3>
+      <div class="content has-text-justified">
+        <p>
+          A 320px-wide (full frame width) strip placed in the <strong>foreground / bottom band</strong>
+          of the image redirects the grab to the bottle: 320&times;128 at <code>top=128</code>
+          &rarr; <strong>11/20 = 55%</strong>; 320&times;80 at <code>top=176</code> &rarr; 10/20 = 50%.
+          The trend in strip height is non-monotone (320&times;96 and 320&times;112 dip to ~10%;
+          320&times;64 = 0%).
+        </p>
+        <p>
+          <strong>Accurate geometry:</strong> these strips sit at the bottom / foreground table edge,
+          <em>below / in front of</em> the objects &mdash; not above them.
+        </p>
+      </div>
+      <div class="caveat-banner">
+        <strong>Confidence caveat.</strong> Success-rate only &mdash; no per-object behavioral
+        breakdown was logged for these, and they predate human video review beyond the success clip
+        shown. Read it as &ldquo;grabs the bottle in 55% of episodes,&rdquo; not as a fully
+        characterized behavior.
+      </div>
+      <div class="vid-frame">
+        <video autoplay muted loop playsinline><source src="static/videos/quirk2_strip.mp4" type="video/mp4"></video>
+        <p class="vid-caption">
+          Full-width 320&times;128 foreground strip. Prompt: &ldquo;pick up the orange&rdquo;.
+          Bottle grabbed in 55% of 20 episodes. (Success-rate metric; strip is in the foreground,
+          not over the objects.)
+        </p>
+      </div>
+    </div>
+
+    <!-- Quirk 3 -->
+    <div class="quirk-block">
+      <span class="quirk-tag">Quirk 3</span>
+      <h3 class="title is-4">Occluding the REQUESTED object makes GR00T grab a different visible object
+        <span class="result-chip">35%</span></h3>
+      <div class="content has-text-justified">
+        <p>
+          A 48&times;48 patch placed <em>on</em> the orange (the object the prompt names) redirects the
+          grab to the bottle <strong>7/20 = 35%</strong> (<code>occlusion_control_traj</code>). A related
+          under-orange patch reaches 45%. With the orange hidden, the arm reaches for the next visible
+          object &mdash; the bottle.
+        </p>
+        <p>
+          This is genuinely an <strong>occlusion</strong> effect (the model can&rsquo;t see what it was
+          told to grab, so it grabs something else) &mdash; distinct from Quirks 1&ndash;2.
+        </p>
+      </div>
+      <div class="honest-note">
+        <strong>Honest note.</strong> We did NOT test covering the two non-target distractors
+        (orange + coke) while leaving the bottle visible &mdash; that specific experiment was never
+        run. The verified effect is occluding the TARGET.
+      </div>
+      <div class="vid-frame">
+        <video autoplay muted loop playsinline><source src="static/videos/quirk3_occlude_orange.mp4" type="video/mp4"></video>
+        <p class="vid-caption">
+          48&times;48 patch covering the orange (the requested object). Prompt:
+          &ldquo;pick up the orange&rdquo;. Unable to see the orange, the arm grabs the bottle.
+          35% across 20 episodes.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PART B — OPTIMIZATION FINDINGS ─────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Part B &mdash; Two optimization findings</h2>
+    <p class="has-text-centered" style="color:#444; max-width:720px; margin:0 auto 2rem auto;">
+      This is the embedding-attack research itself: can we redirect the arm using only a target
+      <em>embedding</em>, with the DiT never differentiated? Yes &mdash; at the edge. No &mdash;
+      anywhere else.
+    </p>
+
+    <!-- Opt finding 1 (positive) -->
+    <div class="quirk-block">
+      <span class="quirk-tag embed">Finding 1 &mdash; positive</span>
+      <h3 class="title is-4">A pure-embedding, DiT-free patch can reproduce the hijack
+        <span class="result-chip">60%</span></h3>
+      <div class="content has-text-justified">
+        <p>
+          <strong>Method (two-stage).</strong> (1) Use a DiT-gradient <em>probe</em> only to FIND a
+          reachable target embedding <code>E*</code> in post_vlln space at a given patch placement.
+          (2) Train a fresh <strong>random-init</strong> patch whose only loss is the L2 distance
+          between its post_vlln tokens and <code>E*</code> &mdash; the DiT is
+          <strong>never</strong> differentiated for this patch.
+        </p>
+        <p>
+          <strong>Result.</strong> This honest patch reaches 40&ndash;60% bottle-grabs at the
+          bottle&rsquo;s edge (best single run 60%, val_collision 0.0371). A random unoptimized patch at
+          the same spot = 0%, so the redirect is caused by the embedding optimization, not
+          texture/placement. The signal is <strong>distributed</strong> across the image-token block;
+          concentrating it on the bottle&rsquo;s single grid cell fails (= 5%).
+        </p>
+      </div>
+      <div class="method-box has-text-centered">
+        <code>patch &rarr; post_vlln tokens</code>
+        <span class="method-arrow">&minus; L2 &rarr;</span>
+        <code>E*</code>
+        <span class="method-arrow">&nbsp;(DiT never differentiated)</span>
+      </div>
+      <div class="honest-note" style="margin-top:1.25rem;">
+        <strong>Takeaway.</strong> You can invert the VLM backbone toward a target representation using
+        pure embedding-distance, with no action supervision, and recover a real behavioral redirect.
+      </div>
+      <div class="vid-frame">
+        <video autoplay muted loop playsinline><source src="static/videos/opt1_honest_60.mp4" type="video/mp4"></video>
+        <p class="vid-caption">
+          Honest pure-embedding patch (random init, DiT never differentiated), matched to a reachable
+          target embedding. 60% bottle-grabs.
+        </p>
+      </div>
+    </div>
+
+    <!-- Opt finding 2 (negative) -->
+    <div class="quirk-block">
+      <span class="quirk-tag negative">Finding 2 &mdash; negative / lesson</span>
+      <h3 class="title is-4">The embedding-distance objective is a leaky, non-portable proxy</h3>
+      <div class="content has-text-justified">
+        <p>
+          <strong>(a) The position test (the decisive one).</strong> We re-ran the
+          <em>exact</em> 40&ndash;60% recipe with the patch jammed into the empty
+          <strong>top-left corner (0,0)</strong>, far from every object, nothing occluded. Result:
+          <strong>0% everywhere</strong> &mdash; honest seeds 0/20 (despite matching <code>E*</code>
+          <em>tighter</em>, val 0.0264, than the 60% edge run&rsquo;s 0.0371), AND the upper-bound
+          DiT-gradient probe itself 0/20 (despite a no-sim action-gate score of 1.5,
+          <em>higher</em> than the edge probe&rsquo;s ~1.06). The arm just grabs the orange. So
+          neither embedding-match quality NOR the open-loop gate transfers across position.
+        </p>
+        <p>
+          <strong>(b) val_collision is meaningless across geometry.</strong> The post_vlln L2 residual
+          to <code>E*</code> is 0.0264 at the corner (giving 0%), while a looser 0.0371 at the edge
+          gives 60%. Within one fixed placement it correlates; it does not port across placements.
+        </p>
+      </div>
+
+      <div class="fig-frame" style="max-width:560px; margin-top:1rem;">
+        <img src="static/images/position_test.png"
+             alt="Two-bar chart: edge placement 60%, corner placement 0%, with embedding-match values.">
+        <p class="fig-caption">
+          The position test. The corner matches <code>E*</code> tighter (val 0.0264) than the edge
+          (val 0.0371), yet the corner gets 0% and the edge gets 60%. Embedding-match quality does
+          not predict the redirect across placements.
+        </p>
+      </div>
+
+      <div class="caveat-banner" style="margin-top:1.5rem;">
+        <strong>Conclusion.</strong> What carries the redirect is the patch&rsquo;s physical PROXIMITY
+        to the target&rsquo;s top edge, not how well it matches a target embedding. The
+        behaviorally-causal directions are not what an L2-to-<code>E*</code> objective targets, and
+        the open-loop action gate over-predicts.
+      </div>
+
+      <div class="vid-frame">
+        <video autoplay muted loop playsinline><source src="static/videos/opt2_corner_0.mp4" type="video/mp4"></video>
+        <p class="vid-caption">
+          Same recipe, patch moved to the empty top-left corner. Despite a TIGHTER embedding match
+          than the 60% run, 0% bottle &mdash; the arm correctly grabs the orange. The hijack is
+          edge-proximity-bound, not position-agnostic.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── BOTTOM LINE ──────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="section-label" style="font-family:'Google Sans',sans-serif; font-size:0.8rem;
+             text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin-bottom:0.75rem;">
+          Bottom line
+        </div>
+        <div class="conclusion-box">
+          The redirect on GR00T-N1.6 is real but conditional: it needs the patch either occluding the
+          requested object or sitting right at the target&rsquo;s edge. A pure-embedding (DiT-free)
+          attack reproduces it ONLY at that edge; pushed to a clearly-non-occluding far placement it
+          collapses to 0%, even for the strongest optimizer. We did not find a position-agnostic,
+          non-occluding embedding hijack on this VLA &mdash; a clean negative result that the
+          embedding-distance objective, by itself, cannot deliver one.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
