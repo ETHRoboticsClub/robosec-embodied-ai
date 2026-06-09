@@ -10,6 +10,7 @@ Central hub for Embodied AI experiments within the Robotics Security Division: f
 | [Experiment 2](experiment_2/README.md) | Latent representation geometry at the S2→S1 interface of GR00T N1.6 | First result |
 | [Experiment 3](experiment_3/README.md) | Adversarial visual patches on generalist robot policies | In progress |
 | [Experiment 4](experiment_4/README.md) | Boundary task steering on frozen GR00T policies | Current result |
+| [Experiment 5](experiment_5/README.md) | Embedding-space attacks on GR00T-N1.6: visual-patch quirks and the limits of pure-embedding hijacking | Wrapped up |
 
 
 ## Structure
