@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Experiment 5 — Embedding-Space Attacks on GR00T-N1.6</title>
+  <title>Experiment 5 — Hijacking GR00T-N1.6 with Adversarial Visual Patches</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -76,8 +76,8 @@
         </a>
       </p>
       <h1 class="title is-1 publication-title">Experiment 5</h1>
-      <p class="subtitle">Embedding-Space Attacks on GR00T-N1.6: Visual-Patch Quirks
-        and the Limits of Pure-Embedding Hijacking</p>
+      <p class="subtitle">Hijacking GR00T-N1.6 with Adversarial Visual Patches:
+        Model Quirks and Optimized Isolated Patches</p>
     </div>
   </div>
 </section>
@@ -93,20 +93,20 @@
             <div class="section-label">Goal</div>
             <p style="color:#444;">
               We try to make GR00T-N1.6 grab the <strong>bottle</strong> while it is told
-              <em>&ldquo;pick up the orange&rdquo;</em>, using an adversarial image patch.
-              Can the redirect be driven purely in the model&rsquo;s <em>embedding</em> space &mdash;
-              matching a target post_vlln representation, with the flow-matching DiT never
-              differentiated?
+              <em>&ldquo;pick up the orange&rdquo;</em>, using an adversarial image patch. We map out
+              which interventions actually redirect the grab in closed-loop simulation, and verify
+              each one on rollout video.
             </p>
           </div>
 
           <div class="column">
             <div class="section-label">Hypothesis</div>
             <p style="color:#444;">
-              If the DiT reads only the post_vlln token embeddings, then inverting the VLM backbone
-              toward a reachable target embedding <code>E*</code> should reproduce the behavioral
-              hijack &mdash; and ideally generalize to arbitrary, non-occluding patch placements.
-              We test whether embedding-match quality is the right objective.
+              GR00T should be vulnerable to image patches that interact with the object it was told
+              to grab. We expect a patch placed right at an object&rsquo;s edge, and occluding the
+              requested object, to be the robust ways to redirect the arm &mdash; and we ask whether an
+              <em>optimized</em> patch can still redirect the grab from a position isolated from every
+              object, measured against matched controls.
             </p>
           </div>
 
@@ -124,13 +124,14 @@
     <a href="5.1/" style="display:block; color:inherit; text-decoration:none;">
       <div class="experiment-card">
         <div class="experiment-number">5.1</div>
-        <div class="experiment-title">Redirecting GR00T-N1.6 with a Visual Patch &mdash;
+        <div class="experiment-title">Hijacking GR00T-N1.6 with Adversarial Visual Patches &mdash;
           What Works, What Doesn&rsquo;t, and Why</div>
         <div class="experiment-desc">
-          Three robust model quirks redirect the grab to the bottle (edge square 65%, foreground
-          strip 55%, occluding the orange 35%). A pure-embedding (DiT-free) patch reproduces the
-          hijack at 60% &mdash; but only at the bottle&rsquo;s edge. Moved to the empty top-left
-          corner with a <em>tighter</em> embedding match, it collapses to 0%.
+          We make GR00T-N1.6 grab the BOTTLE while it is told &ldquo;pick up the orange&rdquo; using
+          adversarial image patches. Two robust, video-verified model quirks redirect the grab (a
+          non-occluding patch at the bottle&rsquo;s top edge, ~65%, and occluding the requested orange,
+          ~35%), plus two optimized patches at an isolated position &mdash; a 2D bottom-left patch
+          (~25%) and a physical box on the table (~20% best-case) &mdash; that beat a 0% control.
         </div>
         <span class="tag tag-status-done">Wrapped up</span>
       </div>
@@ -146,12 +147,14 @@
       <div class="column is-five-sixths">
         <div class="section-label" style="margin-bottom:0.75rem;">Overall Conclusion</div>
         <div class="conclusion-box">
-          The redirect on GR00T-N1.6 is real but conditional: it needs the patch either occluding the
-          requested object or sitting right at the target&rsquo;s edge. A pure-embedding (DiT-free)
-          attack reproduces it ONLY at that edge; pushed to a clearly-non-occluding far placement it
-          collapses to 0%, even for the strongest optimizer. We did not find a position-agnostic,
-          non-occluding embedding hijack on this VLA &mdash; a clean negative result that the
-          embedding-distance objective, by itself, cannot deliver one.
+          The redirect on GR00T-N1.6 is real but conditional: a non-occluding patch right at the
+          bottle&rsquo;s top edge redirects the grab ~65% of the time, and occluding the requested
+          orange makes the arm grab the bottle ~35% of the time. Both are robust, video-verified
+          model quirks &mdash; the model is sensitive to a patch at an object&rsquo;s edge, and to
+          losing sight of the object it was told to grab. Optimized patches placed far from every
+          object &mdash; a 2D bottom-left patch (~25%) and a physical box on the table (~20%
+          best-case) &mdash; also redirect the grab above a 0% control, though weakly and with high
+          seed-variance.
         </div>
       </div>
     </div>
