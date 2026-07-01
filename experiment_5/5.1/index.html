@@ -376,6 +376,93 @@
   </div>
 </section>
 
+<!-- ─── PHYSICAL BOX ACROSS TABLE POSITIONS ────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Physical box across three table positions</h2>
+    <p class="has-text-centered" style="color:#444; max-width:760px; margin:0 auto 1.5rem auto;">
+      The same optimized 12&nbsp;cm textured box (best seed, N=20, deterministic seed&nbsp;0), moved to
+      three positions on the table. Prompt is always <em>&ldquo;pick up the orange&rdquo;</em>; success =
+      the arm grabs the bottle. Matched non-optimized boxes (noise, gray) are 0% at every position.
+    </p>
+
+    <div class="quirk-block">
+      <h3 class="title is-4">Front-left <span class="result-chip">50% (10/20)</span>
+        <span class="result-chip zero">controls 0%</span></h3>
+      <div class="columns is-mobile">
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_success1.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_success2.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_fail1.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_fail2.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_ctrl_noise.mp4" type="video/mp4"></video><p class="vid-caption">noise ctrl</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fl_ctrl_gray.mp4" type="video/mp4"></video><p class="vid-caption">gray ctrl</p></div>
+      </div>
+    </div>
+
+    <div class="quirk-block">
+      <h3 class="title is-4">Center <span class="result-chip">25% (5/20)</span>
+        <span class="result-chip zero">controls 0%</span></h3>
+      <div class="columns is-mobile">
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_success1.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_success2.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_fail1.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_fail2.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_ctrl_noise.mp4" type="video/mp4"></video><p class="vid-caption">noise ctrl</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_mid_ctrl_gray.mp4" type="video/mp4"></video><p class="vid-caption">gray ctrl</p></div>
+      </div>
+    </div>
+
+    <div class="quirk-block">
+      <h3 class="title is-4">Right <span class="result-chip">20% (4/20)</span>
+        <span class="result-chip zero">controls 0%</span></h3>
+      <div class="columns is-mobile">
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_success1.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_success2.mp4" type="video/mp4"></video><p class="vid-caption">success</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_fail1.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_fail2.mp4" type="video/mp4"></video><p class="vid-caption">failure</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_ctrl_noise.mp4" type="video/mp4"></video><p class="vid-caption">noise ctrl</p></div>
+        <div class="column is-2 has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pos_fr_ctrl_gray.mp4" type="video/mp4"></video><p class="vid-caption">gray ctrl</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIGITAL 40x40 TOP-LEFT PATCH ───────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Digital patch &mdash; 40&times;40, image top-left</h2>
+    <p class="has-text-centered" style="color:#444; max-width:760px; margin:0 auto 1.5rem auto;">
+      A 40&times;40 RGB patch pasted at the image top-left corner (<code>top=0, left=0</code>), random init.
+      Three independent seeds each redirect the grab to the bottle <strong>13/20 = 65%</strong>
+      (deterministic seed&nbsp;0); matched control 0/20.
+    </p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <div class="fig-frame" style="max-width:180px;"><img src="static/images/dig40_patch_s44.png" style="image-rendering:pixelated;" alt="40x40 patch, seed 44"></div>
+        <p class="fig-caption">seed 44 &mdash; <strong>65%</strong></p>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <div class="fig-frame" style="max-width:180px;"><img src="static/images/dig40_patch_s45.png" style="image-rendering:pixelated;" alt="40x40 patch, seed 45"></div>
+        <p class="fig-caption">seed 45 &mdash; <strong>65%</strong></p>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <div class="fig-frame" style="max-width:180px;"><img src="static/images/dig40_patch_s46.png" style="image-rendering:pixelated;" alt="40x40 patch, seed 46"></div>
+        <p class="fig-caption">seed 46 &mdash; <strong>65%</strong></p>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:0.5rem;">
+      <div class="column is-one-third has-text-centered">
+        <video autoplay muted loop playsinline><source src="static/videos/dig40_success1.mp4" type="video/mp4"></video>
+        <p class="vid-caption">Bottle grabbed (env-confirmed).</p>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <video autoplay muted loop playsinline><source src="static/videos/dig40_success2.mp4" type="video/mp4"></video>
+        <p class="vid-caption">Bottle grabbed (env-confirmed).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── MODEL QUIRKS ───────────────────────────────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
