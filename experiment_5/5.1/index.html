@@ -475,6 +475,36 @@
   </div>
 </section>
 
+<!-- ─── GENERALIZATION TO PI0 ──────────────────────────────────────────────── -->
+<section class="section" style="background:#fff;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">The same patch transfers to &pi;0</h2>
+    <p class="has-text-centered" style="color:#444; max-width:760px; margin:0 auto 1.5rem auto;">
+      The top-left digital patch is not GR00T-specific. Re-running the identical recipe against a
+      <strong>different</strong> policy &mdash; &pi;0 (open-pi-zero, Fractal-Beta) &mdash; also redirects
+      the grab to the bottle while the prompt still says &ldquo;pick up the orange&rdquo;. A
+      <strong>40&times;40</strong> patch scores <strong>3/20 = 15%</strong> and an
+      <strong>80&times;80</strong> patch <strong>7/20 = 35%</strong> (deterministic seed&nbsp;0, each
+      reproduced at two training seeds); matched controls (random-init and gray, same size and position)
+      stay at <strong>0/20</strong>. Videos below are the 40&times;40 patch.
+    </p>
+    <p class="vid-label has-text-centered" style="font-weight:600;">Successes (bottle grabbed)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pi0_40_success1.mp4" type="video/mp4"></video><p class="vid-caption">Bottle grabbed (env-confirmed).</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pi0_40_success2.mp4" type="video/mp4"></video><p class="vid-caption">Bottle grabbed (env-confirmed).</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Failures (bottle not grabbed)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pi0_40_fail1.mp4" type="video/mp4"></video><p class="vid-caption">Arm picks the orange (prompt obeyed).</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pi0_40_fail2.mp4" type="video/mp4"></video><p class="vid-caption">Arm picks the orange (prompt obeyed).</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Control (random-init patch, 0%)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/pi0_40_ctrl.mp4" type="video/mp4"></video><p class="vid-caption">Random-init patch, same corner &mdash; no redirect.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── MODEL QUIRKS ───────────────────────────────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
