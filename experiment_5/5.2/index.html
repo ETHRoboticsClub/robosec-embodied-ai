@@ -200,9 +200,10 @@
       is the strongest of several random-init training seeds; we also give the mean across seeds so the
       reader sees the spread. Success rate is an env-confirmed grab/action count, not a behavioral
       guarantee &mdash; a proxy. Every attack beats its matched, non-optimized control (all 0%), so the
-      sign is real, but absolute rates are seed-dependent and measured on a single fixed scene. We link a
-      representative success rollout per result; we have inspected still frames of some but do
-      <strong>not</strong> claim full frame-by-frame verification. &ldquo;No patch&rdquo; is not a control
+      sign is real, but absolute rates are seed-dependent and measured on a single fixed scene. For each
+      result we show representative <strong>success, failure, and matched-control</strong> rollouts so the
+      reader can judge; success rate is an env-confirmed grab/action count, not a full frame-by-frame
+      guarantee. &ldquo;No patch&rdquo; is not a control
       &mdash; only optimized&nbsp;&minus;&nbsp;matched-control is the effect.
     </div>
   </div>
@@ -228,20 +229,20 @@
         data volume, was the lever.
       </p>
     </div>
-    <div class="columns is-vcentered">
-      <div class="column is-one-third has-text-centered">
-        <div class="fig-frame" style="max-width:240px;">
-          <img src="static/images/r1_patch.png" alt="The optimized 60x60 top-left patch.">
-          <p class="fig-caption">The optimized 60&times;60 top-left patch, prompt
-            &ldquo;pick up the orange&rdquo;.</p>
-        </div>
-      </div>
-      <div class="column is-two-thirds has-text-centered">
-        <div class="vid-frame">
-          <video autoplay muted loop playsinline><source src="static/videos/r1_digital_bottle.mp4" type="video/mp4"></video>
-          <p class="vid-caption">Bottle grabbed under the orange prompt (env-confirmed grab).</p>
-        </div>
-      </div>
+    <p class="vid-label has-text-centered" style="font-weight:600;">Successes &mdash; bottle grabbed (env-confirmed)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_success1.mp4" type="video/mp4"></video><p class="vid-caption">Arm ignores the orange and grabs the bottle.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_success2.mp4" type="video/mp4"></video><p class="vid-caption">Arm ignores the orange and grabs the bottle.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Failures &mdash; bottle not grabbed</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_fail1.mp4" type="video/mp4"></video><p class="vid-caption">Attack did not redirect the grab.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_fail2.mp4" type="video/mp4"></video><p class="vid-caption">Attack did not redirect the grab.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Control &mdash; un-optimized 60&times;60 patch, same position (0/20)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_control1.mp4" type="video/mp4"></video><p class="vid-caption">Random-init patch &mdash; no redirect.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r1_control2.mp4" type="video/mp4"></video><p class="vid-caption">Random-init patch &mdash; no redirect.</p></div>
     </div>
     <div class="honest-note">
       <strong>Honest note.</strong> Single fixed scene (pose/layout generalization untested); 0.95 is the
@@ -283,34 +284,26 @@
         scene.
       </p>
     </div>
+    <p class="vid-label has-text-centered" style="font-weight:600;">Successes &mdash; drawer closed under the &ldquo;pick&rdquo; prompt (task hijacked)</p>
     <div class="columns is-centered">
-      <div class="column is-two-thirds has-text-centered">
-        <div class="vid-frame">
-          <video autoplay muted loop playsinline><source src="static/videos/r2_drawer_redirect.mp4" type="video/mp4"></video>
-          <p class="vid-caption">Seed-117 episode: the arm ignores the coke and drives the top drawer
-            open&rarr;closed (env-confirmed close).</p>
-        </div>
-      </div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_success1.mp4" type="video/mp4"></video><p class="vid-caption">Arm ignores the coke and closes the top drawer.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_success2.mp4" type="video/mp4"></video><p class="vid-caption">Arm ignores the coke and closes the top drawer.</p></div>
     </div>
-    <div class="columns is-centered" style="margin-top:0.5rem;">
-      <div class="column is-half has-text-centered">
-        <div class="fig-frame">
-          <img src="static/images/r2_startend.png" alt="Start vs end frames — drawer open then closed.">
-          <p class="fig-caption">Start vs end frames &mdash; drawer open &rarr; closed.</p>
-        </div>
-      </div>
-      <div class="column is-half has-text-centered">
-        <div class="fig-frame">
-          <img src="static/images/r2_montage.png" alt="Rollout montage of the seed-117 episode.">
-          <p class="fig-caption">Rollout montage of the same episode.</p>
-        </div>
-      </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Failures &mdash; pick denied, but drawer not closed</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_fail1.mp4" type="video/mp4"></video><p class="vid-caption">Coke not picked; drawer left open.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_fail2.mp4" type="video/mp4"></video><p class="vid-caption">Coke not picked; drawer left open.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">No attack (clean) &mdash; the policy performs either task on demand</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_noattack_pick.mp4" type="video/mp4"></video><p class="vid-caption">Prompt &ldquo;pick up the coke can&rdquo; &mdash; coke picked (1.00 clean).</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r2_noattack_close.mp4" type="video/mp4"></video><p class="vid-caption">Prompt &ldquo;close the top drawer&rdquo; &mdash; drawer closed (~0.50 clean).</p></div>
     </div>
     <div class="honest-note">
-      <strong>Honest note.</strong> I inspected the start/end and montage STILL FRAMES of this seed-117
-      episode (arm ignores coke, closes drawer) &mdash; that is stills, not full-motion verification. The
-      redirect metric is small and noisy (best-of-20 vs mean 0.16); the robust axis is denial. Single
-      locked scene.
+      <strong>Honest note.</strong> The redirect metric is small and noisy (best-of-20 = 0.60 vs a
+      20-seed mean of 0.16); the robust axis is <em>denial</em> (the intended pick is reliably killed).
+      The success clips above are seed-117 episodes where the drawer ends closed; success is scored on the
+      env&rsquo;s drawer state, not a full frame-by-frame guarantee. Single locked scene.
     </div>
   </div>
 </section>
@@ -336,14 +329,20 @@
         property of this particular seed-72 texture across sampler seeds.
       </p>
     </div>
+    <p class="vid-label has-text-centered" style="font-weight:600;">Successes &mdash; deliberate bottle grab (env-confirmed, step&nbsp;&lt;&nbsp;86)</p>
     <div class="columns is-centered">
-      <div class="column is-two-thirds has-text-centered">
-        <div class="vid-frame">
-          <video autoplay muted loop playsinline><source src="static/videos/r3_physical_bottle.mp4" type="video/mp4"></video>
-          <p class="vid-caption">Champion seed-72 texture (det0): a deliberate 21-step bottle grab under
-            the orange prompt.</p>
-        </div>
-      </div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_success1.mp4" type="video/mp4"></video><p class="vid-caption">Champion seed-72 texture (det0): a fast 21-step bottle grab.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_success2.mp4" type="video/mp4"></video><p class="vid-caption">Champion seed-72 texture (det0): deliberate bottle grab.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Failures &mdash; bottle not grabbed</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_fail1.mp4" type="video/mp4"></video><p class="vid-caption">Same texture, other DiT draws &mdash; no grab.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_fail2.mp4" type="video/mp4"></video><p class="vid-caption">Same texture, other DiT draws &mdash; no grab.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Control &mdash; non-optimized box, same FL12 pose (0/60)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_control1.mp4" type="video/mp4"></video><p class="vid-caption">Un-optimized noise-textured box &mdash; no redirect.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r3_control2.mp4" type="video/mp4"></video><p class="vid-caption">Un-optimized noise-textured box &mdash; no redirect.</p></div>
     </div>
     <div class="honest-note">
       <strong>Honest note.</strong> Single fixed scene; &ldquo;2 seeds&rdquo; here means 2
@@ -372,14 +371,20 @@
         GR00T data-efficiency finding.
       </p>
     </div>
+    <p class="vid-label has-text-centered" style="font-weight:600;">Successes &mdash; &pi;0 grabs the bottle (env-confirmed)</p>
     <div class="columns is-centered">
-      <div class="column is-two-thirds has-text-centered">
-        <div class="vid-frame">
-          <video autoplay muted loop playsinline><source src="static/videos/r4_pi0_bottle.mp4" type="video/mp4"></video>
-          <p class="vid-caption">&pi;0 grabs the bottle under the &ldquo;pick up the orange&rdquo; prompt
-            (env-confirmed grab).</p>
-        </div>
-      </div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_success1.mp4" type="video/mp4"></video><p class="vid-caption">&pi;0 ignores the orange and grabs the bottle.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_success2.mp4" type="video/mp4"></video><p class="vid-caption">&pi;0 ignores the orange and grabs the bottle.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Failures &mdash; bottle not grabbed</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_fail1.mp4" type="video/mp4"></video><p class="vid-caption">Attack did not redirect &pi;0.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_fail2.mp4" type="video/mp4"></video><p class="vid-caption">Attack did not redirect &pi;0.</p></div>
+    </div>
+    <p class="vid-label has-text-centered" style="font-weight:600; margin-top:0.5rem;">Control &mdash; random-init patch, same size/position (0/20)</p>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_control1.mp4" type="video/mp4"></video><p class="vid-caption">Un-optimized patch &mdash; no redirect.</p></div>
+      <div class="column is-one-third has-text-centered"><video autoplay muted loop playsinline><source src="static/videos/r4_control2.mp4" type="video/mp4"></video><p class="vid-caption">Un-optimized patch &mdash; no redirect.</p></div>
     </div>
     <div class="honest-note">
       <strong>Honest note.</strong> The new 4-frame / target-only &pi;0 runs are single-seed (seed 44)
