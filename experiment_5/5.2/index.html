@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Four Adversarial-Patch Hijacks of VLA Policies — the Campaign's Best Results</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <style>
+    .method-box {
+      background:#f5f8ff; border:1px solid #d0ddf5; border-radius:8px;
+      padding:1.25rem 1.5rem; margin-top:1rem; font-family: 'Castoro', serif;
+      color:#1a1a2e;
+    }
+    .method-box code { background:rgba(0,0,0,0.04); padding:0.05em 0.4em; border-radius:3px;
+      font-family: ui-monospace, SFMono-Regular, monospace; }
+    .method-arrow { color:#3273dc; font-weight:700; padding:0 0.4em; }
+    .caveat-banner {
+      background:#fff8e1; border-left:4px solid #f0a500; border-radius:0 6px 6px 0;
+      padding:0.9rem 1.3rem; font-size:0.92rem; color:#5a4a1a; margin:1rem 0 1.5rem 0;
+    }
+    .honest-note {
+      background:#eef6f0; border-left:4px solid #1a6b2b; border-radius:0 6px 6px 0;
+      padding:0.9rem 1.3rem; font-size:0.92rem; color:#234a2e; margin:1rem 0;
+    }
+    .quirk-block {
+      margin-bottom:2.5rem; padding-bottom:2rem; border-bottom:1px solid #e8e8e8;
+    }
+    .quirk-block:last-child { border-bottom:none; }
+    .quirk-tag {
+      display:inline-block; font-family:'Google Sans',sans-serif; font-size:0.78rem;
+      text-transform:uppercase; letter-spacing:0.08em; color:#fff; background:#3273dc;
+      border-radius:4px; padding:0.15rem 0.6rem; margin-bottom:0.5rem;
+    }
+    .quirk-tag.embed { background:#e07b39; }
+    .quirk-tag.negative { background:#c0392b; }
+    .result-chip {
+      display:inline-block; font-family:'Google Sans',sans-serif; font-weight:700;
+      font-size:1.05rem; color:#1a6b2b; background:#d1e7dd; border-radius:6px;
+      padding:0.2rem 0.7rem; margin-left:0.4rem;
+    }
+    .result-chip.zero { color:#842029; background:#f8d7da; }
+    .vid-frame { max-width:360px; margin:1rem auto 0 auto; }
+    .vid-caption { color:#666; font-size:0.85rem; margin-top:0.5rem; text-align:center; }
+    .fig-frame { max-width:760px; margin:0 auto; }
+    .fig-frame img { width:100%; border:1px solid #e6e6e6; border-radius:8px; background:#fff; }
+    .fig-caption { color:#666; font-size:0.85rem; margin-top:0.6rem; text-align:center; }
+    .conclusion-box {
+      background:#f8f8f8; border-left:4px solid #1a1a2e; border-radius:0 8px 8px 0;
+      padding:1.5rem 2rem; color:#333; font-size:1rem; line-height:1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <p style="margin-bottom:1rem;">
+            <a href="../" style="color:#888; font-size:0.9rem; text-decoration:none;">
+              <i class="fas fa-arrow-left" style="margin-right:6px;"></i>Experiment 5
+            </a>
+          </p>
+
+          <h1 class="title is-1 publication-title">
+            Four Adversarial-Patch Hijacks<br>of VLA Policies
+          </h1>
+
+          <p class="is-size-5" style="color:#555; margin-top:0.75rem;">
+            The strongest results from our patch-attack campaign: object hijacks, a task hijack,<br>
+            a physical box, and cross-model transfer &mdash; each with a matched control.
+          </p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/baroian">Andrei Baroian</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top:0.5rem;">
+            Robotics Security Division, ETHRC
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.5rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://huggingface.co/nvidia/GR00T-N1.6-fractal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-robot"></i></span>
+                  <span>Target Model</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/simpler-env/SimplerEnv"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-cube"></i></span>
+                  <span>Simulator</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai/tree/main/experiment_5/5.2"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INTRO + BEST-RESULTS TABLE ────────────────────────────────────────── -->
+<section class="section" style="padding-bottom:1.5rem;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">The best results at a glance</h2>
+    <div class="content has-text-justified">
+      <p>
+        Across the patch-attack campaign, the same core idea &mdash; a small optimized patch at the
+        image top-left, or its physical analogue as a textured box on the table &mdash; produces four
+        distinct hijacks of vision-language-action (VLA) policies: making the arm grab a
+        <strong>different object</strong>, making it do a <strong>different task</strong>, doing it with
+        a <strong>physical object</strong> in the scene, and doing it against a
+        <strong>different model family</strong>. Each result below is paired with a matched,
+        non-optimized control; only the optimized&nbsp;&minus;&nbsp;control gap counts.
+      </p>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <table class="table is-fullwidth is-bordered is-striped">
+          <thead>
+            <tr>
+              <th>Attack</th>
+              <th class="has-text-centered">Best SR</th>
+              <th class="has-text-centered">Seeds</th>
+              <th class="has-text-centered">Mean</th>
+              <th class="has-text-centered">Matched control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Digital object-hijack &mdash; &ldquo;pick up the orange&rdquo; &rarr; grabs the
+                <strong>BOTTLE</strong> (GR00T, 60&times;60 top-left patch)</td>
+              <td class="has-text-centered">0.95 <span style="color:#666;">(seed 45, 19/20)</span></td>
+              <td class="has-text-centered">2</td>
+              <td class="has-text-centered">0.725</td>
+              <td class="has-text-centered">0.00 <span style="color:#666;">(0/20)</span></td>
+            </tr>
+            <tr>
+              <td>Digital task-hijack &mdash; &ldquo;pick up the coke can&rdquo; &rarr;
+                <strong>CLOSES</strong> the drawer (GR00T, 80&times;80 top-left patch)</td>
+              <td class="has-text-centered">0.60 redirect <span style="color:#666;">(seed 117)</span></td>
+              <td class="has-text-centered">20</td>
+              <td class="has-text-centered">0.16 &plusmn; 0.17</td>
+              <td class="has-text-centered">0.00 <span style="color:#666;">(0/15)</span></td>
+            </tr>
+            <tr>
+              <td>Physical object-hijack &mdash; orange &rarr; <strong>BOTTLE</strong>, front-left
+                12&nbsp;cm textured box (GR00T, SAPIEN render)</td>
+              <td class="has-text-centered">0.50 <span style="color:#666;">(seed 72, det0, 10/20)</span></td>
+              <td class="has-text-centered">13</td>
+              <td class="has-text-centered">0.14</td>
+              <td class="has-text-centered">0.00 <span style="color:#666;">(0/60)</span></td>
+            </tr>
+            <tr>
+              <td>Cross-model transfer to &pi;0 (open-pi-zero) &mdash; orange &rarr;
+                <strong>BOTTLE</strong> (top-left patch)</td>
+              <td class="has-text-centered">0.45 <span style="color:#666;">(4-frame)</span> /
+                0.35 <span style="color:#666;">(80&times;80)</span></td>
+              <td class="has-text-centered">1&ndash;2</td>
+              <td class="has-text-centered">&mdash;</td>
+              <td class="has-text-centered">0.00 <span style="color:#666;">(0/20)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="has-text-centered" style="color:#666; max-width:760px; margin:0 auto; font-size:0.9rem;">
+      The prompt is held fixed; success = an env-confirmed grab/action; every eval is N=20 closed-loop
+      sim episodes. Only optimized&nbsp;&minus;&nbsp;control counts.
+    </p>
+
+    <div class="caveat-banner">
+      <strong>Read these as best-of-N results with matched controls.</strong> Each &ldquo;Best SR&rdquo;
+      is the strongest of several random-init training seeds; we also give the mean across seeds so the
+      reader sees the spread. Success rate is an env-confirmed grab/action count, not a behavioral
+      guarantee &mdash; a proxy. Every attack beats its matched, non-optimized control (all 0%), so the
+      sign is real, but absolute rates are seed-dependent and measured on a single fixed scene. We link a
+      representative success rollout per result; we have inspected still frames of some but do
+      <strong>not</strong> claim full frame-by-frame verification. &ldquo;No patch&rdquo; is not a control
+      &mdash; only optimized&nbsp;&minus;&nbsp;matched-control is the effect.
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULT 1 — DIGITAL OBJECT-HIJACK ──────────────────────────────────── -->
+<section class="section" style="background:#fff;">
+  <div class="container is-max-desktop">
+    <span class="quirk-tag">Result 1 &mdash; digital object-hijack</span>
+    <h3 class="title is-4">A 60&times;60 top-left patch makes GR00T grab the BOTTLE while told
+      &ldquo;pick up the orange&rdquo; <span class="result-chip">0.95</span></h3>
+    <div class="content has-text-justified">
+      <p>
+        An optimized 60&times;60 RGB patch pasted at the image top-left (<code>top=0, left=0</code>),
+        random init, distilled toward bottle-grab teacher actions. Model
+        <code>nvidia/GR00T-N1.6</code> (fractal / <code>OXE_GOOGLE</code>); SimplerEnv Google
+        3-object grasp scene (orange, coke can, white bottle), fixed <code>scene_seed=42</code>; the
+        prompt is fixed at <em>&ldquo;pick up the orange&rdquo;</em> and success = grabs the bottle.
+        Best of 2 random-init training seeds: <strong>seed 45 = 19/20 = 0.95</strong>; the other seed =
+        0.50; <strong>2-seed mean 0.725</strong>. The matched 60&times;60 un-optimized random-init patch
+        (same position) is <strong>0/20 = 0.00</strong>. It was trained on only
+        <strong>22 native bottle-grasp frames</strong> &mdash; a data-efficiency point: capacity, not
+        data volume, was the lever.
+      </p>
+    </div>
+    <div class="columns is-vcentered">
+      <div class="column is-one-third has-text-centered">
+        <div class="fig-frame" style="max-width:240px;">
+          <img src="static/images/r1_patch.png" alt="The optimized 60x60 top-left patch.">
+          <p class="fig-caption">The optimized 60&times;60 top-left patch, prompt
+            &ldquo;pick up the orange&rdquo;.</p>
+        </div>
+      </div>
+      <div class="column is-two-thirds has-text-centered">
+        <div class="vid-frame">
+          <video autoplay muted loop playsinline><source src="static/videos/r1_digital_bottle.mp4" type="video/mp4"></video>
+          <p class="vid-caption">Bottle grabbed under the orange prompt (env-confirmed grab).</p>
+        </div>
+      </div>
+    </div>
+    <div class="honest-note">
+      <strong>Honest note.</strong> Single fixed scene (pose/layout generalization untested); 0.95 is the
+      best seed vs a 0.725 two-seed mean &mdash; strong but not yet certified at &ge;3 seeds / large-N
+      with the DiT sampler pinned. Success and loss are decoupled (loss&nbsp;&perp;&nbsp;SR).
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULT 2 — DIGITAL TASK-HIJACK ────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="quirk-tag">Result 2 &mdash; digital task-hijack</span>
+    <h3 class="title is-4">The same top-left patch makes GR00T CLOSE THE DRAWER while told
+      &ldquo;pick up the coke can&rdquo; <span class="result-chip">0.60</span></h3>
+    <div class="content has-text-justified">
+      <p>
+        This time the redirect target is a <em>different task</em>, not a different object. An
+        80&times;80 top-left patch, GR00T, on a locked top-open composite drawer scene (coke can on the
+        dresser). Prompt <em>&ldquo;pick up the coke can&rdquo;</em>. Two axes:
+      </p>
+      <p>
+        <strong>(1) Denial.</strong> Clean pick = 20/20 = 1.00; with the patch the best seed drives pick
+        to <strong>0/20 = 0.00</strong> (mean across 20 seeds 0.21&nbsp;&plusmn;&nbsp;0.22) &mdash; it
+        reliably kills the intended task.
+      </p>
+      <p>
+        <strong>(2) Redirect.</strong> In the best of 20 random-init seeds (seed 117) the arm actually
+        closes the top drawer <strong>0.60</strong> of episodes (20-seed mean
+        0.16&nbsp;&plusmn;&nbsp;0.17); the matched random-init control = <strong>0/15 = 0.00</strong>.
+        Utility is preserved: under the honest &ldquo;close the drawer&rdquo; prompt the patched policy
+        still closes ~0.47 (&asymp; clean ~0.50).
+      </p>
+      <p>
+        <strong>Key mechanism.</strong> Training on the close-drawer frames alone
+        (&ldquo;target-only&rdquo;) is <strong>dead</strong> (best redirect 0.15, mean 0.018 &asymp; the
+        0.00 control) &mdash; the <strong>cross-relabeled bridge frames</strong> (attack-scene image +
+        close-drawer action label) are load-bearing when the target behavior is filmed in a different
+        scene.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-two-thirds has-text-centered">
+        <div class="vid-frame">
+          <video autoplay muted loop playsinline><source src="static/videos/r2_drawer_redirect.mp4" type="video/mp4"></video>
+          <p class="vid-caption">Seed-117 episode: the arm ignores the coke and drives the top drawer
+            open&rarr;closed (env-confirmed close).</p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered" style="margin-top:0.5rem;">
+      <div class="column is-half has-text-centered">
+        <div class="fig-frame">
+          <img src="static/images/r2_startend.png" alt="Start vs end frames — drawer open then closed.">
+          <p class="fig-caption">Start vs end frames &mdash; drawer open &rarr; closed.</p>
+        </div>
+      </div>
+      <div class="column is-half has-text-centered">
+        <div class="fig-frame">
+          <img src="static/images/r2_montage.png" alt="Rollout montage of the seed-117 episode.">
+          <p class="fig-caption">Rollout montage of the same episode.</p>
+        </div>
+      </div>
+    </div>
+    <div class="honest-note">
+      <strong>Honest note.</strong> I inspected the start/end and montage STILL FRAMES of this seed-117
+      episode (arm ignores coke, closes drawer) &mdash; that is stills, not full-motion verification. The
+      redirect metric is small and noisy (best-of-20 vs mean 0.16); the robust axis is denial. Single
+      locked scene.
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULT 3 — PHYSICAL BOX ───────────────────────────────────────────── -->
+<section class="section" style="background:#fff;">
+  <div class="container is-max-desktop">
+    <span class="quirk-tag">Result 3 &mdash; physical box</span>
+    <h3 class="title is-4">A physical textured box on the table hijacks the grab to the BOTTLE
+      <span class="result-chip">0.50</span> <span class="result-chip zero">control 0%</span></h3>
+    <div class="content has-text-justified">
+      <p>
+        A front-left, 12&nbsp;cm flat textured box sitting on the table, its 48&times;48 top texture
+        optimized and rendered through the true SAPIEN camera (real perspective / lighting / occlusion)
+        with straight-through (BPDA) gradients &mdash; not a pixel overlay. GR00T, prompt
+        <em>&ldquo;pick up the orange&rdquo;</em>, success = grabs the bottle. The frozen seed-72
+        champion texture scores <strong>det0 = 10/20 = 0.50</strong> and
+        <strong>det1 = 8/20 = 0.40</strong> on a held-out DiT-sampler seed. Matched non-optimized
+        noise/gray boxes (same pose) = <strong>0/60 = 0.00</strong>. All 10 det0 successes are
+        <em>deliberate</em> (env-confirmed grab AND success-step&nbsp;&lt;&nbsp;86; fastest 21 steps).
+        The lever is <strong>init-selection</strong>: best of 13 random-init training seeds = 0.50, but
+        the mean is only 0.14 &mdash; a fresh seed typically lands ~0.10&ndash;0.14, and 0.50 is a
+        property of this particular seed-72 texture across sampler seeds.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-two-thirds has-text-centered">
+        <div class="vid-frame">
+          <video autoplay muted loop playsinline><source src="static/videos/r3_physical_bottle.mp4" type="video/mp4"></video>
+          <p class="vid-caption">Champion seed-72 texture (det0): a deliberate 21-step bottle grab under
+            the orange prompt.</p>
+        </div>
+      </div>
+    </div>
+    <div class="honest-note">
+      <strong>Honest note.</strong> Single fixed scene; &ldquo;2 seeds&rdquo; here means 2
+      DiT-sampler seeds on ONE texture (det0 0.50 / det1 0.40), not 2 training seeds &mdash; the
+      mean-0.14 figure is the honest expectation for a fresh seed. Physical (rendered-object) rather than
+      digital overlay.
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULT 4 — CROSS-MODEL TO PI0 ─────────────────────────────────────── -->
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="quirk-tag">Result 4 &mdash; cross-model transfer</span>
+    <h3 class="title is-4">The top-left patch attack is not GR00T-specific &mdash; it transfers to
+      &pi;0 <span class="result-chip">0.45</span></h3>
+    <div class="content has-text-justified">
+      <p>
+        Re-running the same top-left digital-patch recipe against a <em>different</em> policy &mdash;
+        &pi;0 (open-pi-zero, Fractal-Beta) &mdash; also redirects the grab to the bottle while the prompt
+        still says <em>&ldquo;pick up the orange&rdquo;</em>. A patch trained on just
+        <strong>4 target frames scores 9/20 = 0.45</strong> (the best &pi;0 number; 22-frame
+        target-only = 0.25) and an <strong>80&times;80 patch = 7/20 = 0.35</strong> (40&times;40 =
+        3/20 = 0.15, reproduced at 2 seeds). Every matched control (random-init and gray, same size and
+        position) = <strong>0/20 = 0.00</strong>. The 4-frames-beats-22-frames pattern mirrors the
+        GR00T data-efficiency finding.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-two-thirds has-text-centered">
+        <div class="vid-frame">
+          <video autoplay muted loop playsinline><source src="static/videos/r4_pi0_bottle.mp4" type="video/mp4"></video>
+          <p class="vid-caption">&pi;0 grabs the bottle under the &ldquo;pick up the orange&rdquo; prompt
+            (env-confirmed grab).</p>
+        </div>
+      </div>
+    </div>
+    <div class="honest-note">
+      <strong>Honest note.</strong> The new 4-frame / target-only &pi;0 runs are single-seed (seed 44)
+      each; single scene. Demonstrates cross-model transferability of the attack.
+    </div>
+  </div>
+</section>
+
+<!-- ─── BOTTOM LINE ──────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-five-sixths">
+        <div class="section-label" style="font-family:'Google Sans',sans-serif; font-size:0.8rem;
+             text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin-bottom:0.75rem;">
+          Bottom line
+        </div>
+        <div class="conclusion-box">
+          The same tiny top-left patch idea produces object hijacks (up to 0.95 digital, 0.50 physical),
+          a full task hijack (pick&nbsp;&rarr;&nbsp;close drawer, 0.60 best redirect with reliable
+          denial of the intended task), and transfers across model families (&pi;0, 0.45). Each result
+          beats a 0% matched control, so the sign of every effect is real. But the best-case rates come
+          from best-of-N seed selection on a single fixed scene, the means across seeds are markedly
+          lower than the headline numbers, and the effects are seed-dependent &mdash; these are genuine
+          adversarial hijacks, reported with their spread and their controls rather than as guarantees.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered content">
+        <p>
+          <a href="https://github.com/ETHRoboticsClub/robosec-embodied-ai">
+            <i class="fab fa-github"></i> ETHRoboticsClub/robosec-embodied-ai
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+          Page template from
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">
+            Academic Project Page Template</a>.
+          &nbsp;&nbsp;·&nbsp;&nbsp; 2026
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
